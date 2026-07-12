@@ -14,7 +14,7 @@
 		<section class="index-preview" aria-labelledby="index-preview-title">
 			<h2 id="index-preview-title">表現名から探す</h2>
 			<ul class="index-preview__list">
-				<li class="index-preview__item" data-index-name="カード" data-index-purpose="情報整理"><a href="<?php echo esc_url(home_url('/ui-collection/#card-ui')); ?>">カード</a><span>UI COLLECTION</span></li>
+				<li class="index-preview__item" data-index-name="カード" data-index-purpose="情報整理"><a href="<?php echo esc_url(home_url('/ui-collection/#card-layout')); ?>">カード</a><span>UI COLLECTION</span></li>
 				<li class="index-preview__item" data-index-name="タイポグラフィー" data-index-purpose="印象づくり"><a href="<?php echo esc_url(home_url('/visual-playground/#typography')); ?>">タイポグラフィー</a><span>VISUAL PLAYGROUND</span></li>
 				<li class="index-preview__item" data-index-name="達成ゲージ" data-index-purpose="進捗表示"><a href="<?php echo esc_url(home_url('/data-motion/#progress-meter')); ?>">達成ゲージ</a><span>DATA MOTION</span></li>
 				<li class="index-preview__item" data-index-name="スクロール連動" data-index-purpose="物語表現"><a href="<?php echo esc_url(home_url('/story-experience/#scroll-animation')); ?>">スクロール連動</a><span>STORY EXPERIENCE</span></li>

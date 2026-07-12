@@ -64,8 +64,8 @@
 		<div class="keyword-links" aria-label="人気キーワード">
 			<p class="keyword-links__title">人気キーワード</p>
 			<ul class="keyword-links__list">
-				<li><a href="<?php echo esc_url(home_url('/ui-collection/#card-ui')); ?>">カードUI</a></li>
-				<li><a href="<?php echo esc_url(home_url('/ui-collection/#slider')); ?>">スライダー</a></li>
+				<li><a href="<?php echo esc_url(home_url('/ui-collection/#card-layout')); ?>">カードUI</a></li>
+				<li><a href="<?php echo esc_url(home_url('/ui-collection/#flip-card')); ?>">フリップカード</a></li>
 				<li><a href="<?php echo esc_url(home_url('/visual-playground/#typography')); ?>">タイポグラフィー</a></li>
 				<li><a href="<?php echo esc_url(home_url('/data-motion/#progress-meter')); ?>">達成ゲージ</a></li>
 				<li><a href="<?php echo esc_url(home_url('/story-experience/#scroll-animation')); ?>">スクロール演出</a></li>

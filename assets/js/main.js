@@ -81,3 +81,133 @@ document.addEventListener('DOMContentLoaded', () => {
 		mobileMedia.addListener(handleViewportChange);
 	}
 });
+
+document.addEventListener('DOMContentLoaded', () => {
+	document.querySelectorAll('[data-flip-card]').forEach((card) => {
+		const front = card.querySelector('.flip-card__front');
+		const back = card.querySelector('.flip-card__back');
+		const openButton = card.querySelector('[data-flip-open]');
+		const closeButton = card.querySelector('[data-flip-close]');
+
+		if (!front || !back || !openButton || !closeButton) {
+			return;
+		}
+
+		const setFlipped = (isFlipped) => {
+			card.classList.toggle('is-flipped', isFlipped);
+			openButton.setAttribute('aria-expanded', String(isFlipped));
+			front.setAttribute('aria-hidden', String(isFlipped));
+			back.setAttribute('aria-hidden', String(!isFlipped));
+			openButton.tabIndex = isFlipped ? -1 : 0;
+			closeButton.tabIndex = isFlipped ? 0 : -1;
+
+			window.requestAnimationFrame(() => {
+				(isFlipped ? closeButton : openButton).focus();
+			});
+		};
+
+		openButton.addEventListener('click', () => setFlipped(true));
+		closeButton.addEventListener('click', () => setFlipped(false));
+	});
+
+	document.querySelectorAll('[data-tabs]').forEach((tabGroup) => {
+		const tabs = Array.from(tabGroup.querySelectorAll('[role="tab"]'));
+		const panels = tabs.map((tab) => document.getElementById(tab.getAttribute('aria-controls')));
+
+		if (!tabs.length || panels.some((panel) => !panel)) {
+			return;
+		}
+
+		const activateTab = (nextIndex, moveFocus = false) => {
+			tabs.forEach((tab, index) => {
+				const isSelected = index === nextIndex;
+				tab.setAttribute('aria-selected', String(isSelected));
+				tab.tabIndex = isSelected ? 0 : -1;
+				panels[index].hidden = !isSelected;
+			});
+
+			if (moveFocus) {
+				tabs[nextIndex].focus();
+			}
+		};
+
+		tabs.forEach((tab, index) => {
+			tab.addEventListener('click', () => activateTab(index));
+			tab.addEventListener('keydown', (event) => {
+				let nextIndex = index;
+
+				if (event.key === 'ArrowRight') {
+					nextIndex = (index + 1) % tabs.length;
+				} else if (event.key === 'ArrowLeft') {
+					nextIndex = (index - 1 + tabs.length) % tabs.length;
+				} else if (event.key === 'Home') {
+					nextIndex = 0;
+				} else if (event.key === 'End') {
+					nextIndex = tabs.length - 1;
+				} else {
+					return;
+				}
+
+				event.preventDefault();
+				activateTab(nextIndex, true);
+			});
+		});
+	});
+
+	document.querySelectorAll('[data-accordion]').forEach((accordion) => {
+		accordion.querySelectorAll('.accordion__button').forEach((button) => {
+			const panel = document.getElementById(button.getAttribute('aria-controls'));
+
+			if (!panel) {
+				return;
+			}
+
+			button.addEventListener('click', () => {
+				const isOpen = button.getAttribute('aria-expanded') === 'true';
+				button.setAttribute('aria-expanded', String(!isOpen));
+				panel.hidden = isOpen;
+			});
+		});
+	});
+
+	document.querySelectorAll('[data-modal-open]').forEach((openButton) => {
+		const dialog = document.getElementById(openButton.dataset.modalOpen);
+
+		if (!dialog || typeof dialog.showModal !== 'function') {
+			return;
+		}
+
+		const closeButton = dialog.querySelector('[data-modal-close]');
+		let lastTrigger = null;
+
+		const closeDialog = () => {
+			if (dialog.open) {
+				dialog.close();
+			}
+		};
+
+		openButton.addEventListener('click', () => {
+			lastTrigger = openButton;
+			dialog.showModal();
+			document.documentElement.classList.add('modal-open');
+		});
+
+		if (closeButton) {
+			closeButton.addEventListener('click', closeDialog);
+		}
+
+		dialog.addEventListener('click', (event) => {
+			if (event.target === dialog) {
+				closeDialog();
+			}
+		});
+
+		dialog.addEventListener('close', () => {
+			document.documentElement.classList.remove('modal-open');
+
+			if (lastTrigger && lastTrigger.isConnected) {
+				lastTrigger.focus();
+			}
+		});
+	});
+});
