@@ -13,16 +13,19 @@
 		</header>
 
 		<nav class="ui-demo-index" aria-label="UIデモのページ内目次">
-			<h2 class="ui-demo-index__title">8種類のUIデモ</h2>
+			<h2 class="ui-demo-index__title">11種類のUIデモ</h2>
 			<ol class="ui-demo-index__list">
 				<li><a href="#card-layout">カードレイアウト</a></li>
 				<li><a href="#flip-card">フリップカード</a></li>
 				<li><a href="#tabs">タブ</a></li>
 				<li><a href="#accordion">アコーディオン</a></li>
 				<li><a href="#modal">モーダル</a></li>
+				<li><a href="#cta-microinteraction">CTAマイクロインタラクション</a></li>
+				<li><a href="#custom-paw-cursor">肉球デザインカーソル</a></li>
 				<li><a href="#carousel">スライダー／カルーセル</a></li>
 				<li><a href="#attraction-filter">検索・フィルター</a></li>
 				<li><a href="#before-after">ビフォー・アフター比較</a></li>
+				<li><a href="#choice-diagnosis">選択式診断</a></li>
 			</ol>
 		</nav>
 
@@ -139,6 +142,61 @@
 			<button class="button-link" type="button" data-modal-open="light-arrow-dialog">アトラクション詳細を見る</button>
 		</section>
 
+		<section id="cta-microinteraction" class="ui-demo" aria-labelledby="cta-microinteraction-title">
+			<header class="ui-demo__header">
+				<p class="section-label">CTA MICROINTERACTION</p>
+				<h2 id="cta-microinteraction-title">CTAマイクロインタラクション</h2>
+				<p>CTAの矢印に短い光の動きを加え、クリックできることや次のコンテンツへの導線を自然に伝えるマイクロインタラクションです。</p>
+			</header>
+			<div class="cta-microinteraction-demo">
+				<div class="cta-microinteraction-demo__actions">
+					<a class="button-link is-arrow-shine" href="#carousel">
+						<span>次のコンテンツを見る</span>
+						<span class="cta-arrow-shine__icon" aria-hidden="true">→</span>
+					</a>
+					<a class="text-button is-arrow-shine" href="#card-layout">
+						<span>詳しく見る</span>
+						<span class="cta-arrow-shine__icon" aria-hidden="true">→</span>
+					</a>
+					<a class="text-link is-arrow-shine" href="#cta-microinteraction-notes">
+						<span>実装のポイントを見る</span>
+						<span class="cta-arrow-shine__icon" aria-hidden="true">→</span>
+					</a>
+				</div>
+				<p class="cta-microinteraction-demo__note">矢印部分に注目すると、一定間隔で短い光の動きを確認できます。マウスやキーボードでCTAを選択した際の変化も確認してください。</p>
+			</div>
+			<div class="ui-demo-notes">
+				<section><h3>どんな見せ方？</h3><p>ボタンやテキストリンクの矢印に短い光の動きを加え、クリックできることや次へ進む方向を視覚的に伝える表現です。</p></section>
+				<section><h3>向いている用途</h3><ul><li>次のセクションへの誘導</li><li>詳細ページへのリンク</li><li>応募フォームへの導線</li><li>商品やサービスの詳細CTA</li><li>キャンペーン参加ボタン</li><li>コンテンツを順番に見せるページ</li></ul></section>
+				<section><h3>期待できること</h3><p>静止したCTAへ適度な変化を加えることで、ページ内の導線に気づいてもらいやすくなります。</p><p>矢印の方向と光の動きを組み合わせることで、「この先に情報がある」「次へ進める」という感覚を補助できます。</p></section>
+				<section id="cta-microinteraction-notes"><h3>設計のポイント</h3><p>すべてのCTAを同じ強さで光らせると、ページ内の優先順位が分かりにくくなります。</p><p>重要なCTAや、ユーザーに気づいてほしい導線へ絞って使用することが重要です。</p><p>動きはCTAの発見を助ける範囲に留め、文章を読んでいる最中に注意を奪い続けない再生間隔にしてください。</p><p>hoverだけに依存するとタッチ端末では伝わらないため、自動再生と操作時の反応を組み合わせます。</p></section>
+				<section><h3>関連する表現</h3><ul><li>CTAアニメーション</li><li>マイクロインタラクション</li><li>ホバーアニメーション</li><li>視線誘導</li><li>アフォーダンス</li><li>モーションデザイン</li></ul></section>
+			</div>
+		</section>
+
+		<section id="custom-paw-cursor" class="ui-demo" aria-labelledby="custom-paw-cursor-title">
+			<header class="ui-demo__header">
+				<p class="section-label">PAW CURSOR</p>
+				<h2 id="custom-paw-cursor-title">肉球デザインカーソル</h2>
+				<p>動物の肉球をモチーフにしたカーソルと、移動に合わせて現れる小さな光によって、サイトを探索する楽しさと世界観を補強するマイクロインタラクションです。</p>
+			</header>
+			<div class="custom-paw-cursor-demo">
+				<p class="custom-paw-cursor-demo__message">このエリア内でマウスを動かし、リンクやボタンに重ねたりクリックしたりして、肉球カーソルの変化を確認してみてください。</p>
+				<div class="custom-paw-cursor-demo__actions">
+					<a class="text-link" href="#cta-microinteraction">CTAデモを見る</a>
+					<button class="button-link" type="button" data-modal-open="light-arrow-dialog">詳細モーダルを開く</button>
+				</div>
+				<p class="custom-paw-cursor-demo__note">この演出は、マウスなどの細かいポインター操作に対応した環境で確認できます。</p>
+			</div>
+			<div class="ui-demo-notes">
+				<section><h3>どんな見せ方？</h3><p>通常の矢印カーソルを肉球モチーフのデザインへ置き換え、移動時には小さな光を短く残します。</p><p>リンクやボタンへ重ねたとき、クリックしたときにも肉球の見た目を変化させ、操作に対する反応を返します。</p></section>
+				<section><h3>向いている用途</h3><ul><li>テーマパーク型サイト</li><li>エンターテインメントサイト</li><li>キャンペーンサイト</li><li>キャラクターや動物を扱うコンテンツ</li><li>ゲーム性や探索感のあるサイト</li><li>独自の世界観を体験させたいブランドサイト</li></ul></section>
+				<section><h3>期待できること</h3><p>全ページを通して共通の案内役を持たせることで、サイトを移動する行為そのものを体験の一部にできます。</p><p>肉球と光の反応によって、ユーザーがサイトの世界へ参加している感覚や、触ってみたくなる気持ちを補助します。</p></section>
+				<section><h3>設計のポイント</h3><p>独自カーソルは常に視界へ入るため、デザイン性だけでなく、クリック位置の分かりやすさが重要です。</p><p>入力、テキスト選択、ドラッグなどの操作では標準カーソルへ戻し、演出より操作性を優先します。</p><p>タッチ端末ではカーソルが存在しないため、画面幅ではなくポインターの種類によって有効化を判断します。</p></section>
+				<section><h3>関連する表現</h3><ul><li>カスタムカーソル</li><li>カーソルエフェクト</li><li>マイクロインタラクション</li><li>操作フィードバック</li><li>モーションデザイン</li><li>世界観演出</li></ul></section>
+			</div>
+		</section>
+
 		<section id="carousel" class="ui-demo" aria-labelledby="carousel-title">
 			<header class="ui-demo__header"><p class="section-label">CAROUSEL</p><h2 id="carousel-title">スライダー／カルーセル</h2><p>複数の情報を横方向へ切り替えながら、限られた表示領域で順番に見せるUIです。</p><p class="carousel__instruction">前後ボタンやドットのほか、左右にスワイプまたはドラッグでも切り替えられます。</p></header>
 			<div class="carousel" data-carousel role="region" aria-roledescription="カルーセル" aria-label="SINQ WEB PARKのおすすめスポット">
@@ -155,22 +213,43 @@
 		</section>
 
 		<section id="attraction-filter" class="ui-demo" aria-labelledby="attraction-filter-title">
-			<header class="ui-demo__header"><p class="section-label">SEARCH &amp; FILTER</p><h2 id="attraction-filter-title">検索・フィルター</h2><p>キーワードや条件から、目的に合う情報を絞り込むUIです。</p></header>
-			<div class="attraction-filter" data-attraction-filter>
-				<div class="attraction-filter__controls"><label for="attraction-keyword">アトラクションをキーワードで探す</label><input id="attraction-keyword" class="attraction-filter__input" type="search" placeholder="例：光、言葉、数字、ストーリー" data-filter-query><div class="filter-chips" role="group" aria-label="アトラクションのカテゴリー"><button type="button" aria-pressed="true" data-filter-category="all">すべて</button><button type="button" aria-pressed="false" data-filter-category="UIを体験">UIを体験</button><button type="button" aria-pressed="false" data-filter-category="ビジュアルを楽しむ">ビジュアルを楽しむ</button><button type="button" aria-pressed="false" data-filter-category="データを見る">データを見る</button><button type="button" aria-pressed="false" data-filter-category="ストーリーを巡る">ストーリーを巡る</button></div><div class="attraction-filter__summary"><p data-filter-count aria-live="polite">8件中8件を表示</p><button class="text-button" type="button" data-filter-reset>条件をリセット</button></div></div>
-				<div class="filter-results" data-filter-results>
-					<article class="filter-result" data-filter-item data-category="UIを体験"><h3>LIGHT ARROW RIDE</h3><p class="filter-result__meta">UIを体験 ／ UI COLLECTION</p><p>光る矢印と小さな反応で、視線誘導を体験するライド。</p></article>
-					<article class="filter-result" data-filter-item data-category="UIを体験"><h3>FLIP CHARACTER LAB</h3><p class="filter-result__meta">UIを体験 ／ UI COLLECTION</p><p>カードの表裏を切り替えて、キャラクターを知る研究室。</p></article>
-					<article class="filter-result" data-filter-item data-category="ビジュアルを楽しむ"><h3>WORD FOREST</h3><p class="filter-result__meta">ビジュアルを楽しむ ／ VISUAL PLAYGROUND</p><p>言葉が枝分かれしながら広がる、不思議な森。</p></article>
-					<article class="filter-result" data-filter-item data-category="ビジュアルを楽しむ"><h3>TYPOGRAPHY PARADE</h3><p class="filter-result__meta">ビジュアルを楽しむ ／ VISUAL PLAYGROUND</p><p>文字の大きさや動きが次々と変化するパレード。</p></article>
-					<article class="filter-result" data-filter-item data-category="データを見る"><h3>MOTION METER</h3><p class="filter-result__meta">データを見る ／ DATA MOTION</p><p>みんなのアクションで達成ゲージがたまる研究施設。</p></article>
-					<article class="filter-result" data-filter-item data-category="データを見る"><h3>NUMBER TOWER</h3><p class="filter-result__meta">データを見る ／ DATA MOTION</p><p>数字の変化をカウントアップで観測するタワー。</p></article>
-					<article class="filter-result" data-filter-item data-category="ストーリーを巡る"><h3>STORY TRAIN</h3><p class="filter-result__meta">ストーリーを巡る ／ STORY EXPERIENCE</p><p>物語に沿って車窓の景色が変化する列車。</p></article>
-					<article class="filter-result" data-filter-item data-category="ストーリーを巡る"><h3>SCROLL JOURNEY</h3><p class="filter-result__meta">ストーリーを巡る ／ STORY EXPERIENCE</p><p>スクロールに合わせて場面が進む体験型ツアー。</p></article>
+			<header class="ui-demo__header"><p class="section-label">SEARCH &amp; FILTER</p><h2 id="attraction-filter-title">検索・フィルター</h2><p>興味のあるタグを複数選び、目的に合う情報を絞り込むUIです。</p></header>
+			<form class="multi-tag-filter" data-multi-tag-filter>
+				<div class="multi-tag-filter__controls">
+					<fieldset class="multi-tag-filter__group" data-filter-group>
+						<legend>興味のあるタグを選ぶ</legend>
+						<div class="multi-tag-filter__tags">
+							<label><input type="checkbox" value="ui" data-filter-tag>UI</label>
+							<label><input type="checkbox" value="visual" data-filter-tag>ビジュアル</label>
+							<label><input type="checkbox" value="animation" data-filter-tag>アニメーション</label>
+							<label><input type="checkbox" value="interaction" data-filter-tag>インタラクション</label>
+							<label><input type="checkbox" value="data" data-filter-tag>データ</label>
+							<label><input type="checkbox" value="story" data-filter-tag>ストーリー</label>
+							<label><input type="checkbox" value="sound" data-filter-tag>サウンド</label>
+						</div>
+					</fieldset>
+					<div class="multi-tag-filter__summary">
+						<p data-filter-selection>選択中：すべて</p>
+						<button class="multi-tag-filter__reset" type="reset">すべて解除</button>
+					</div>
+					<div class="multi-tag-filter__status" aria-live="polite" aria-atomic="true">
+						<p data-filter-count>8件のコンテンツを表示しています</p>
+						<p data-filter-empty hidden>条件に合うコンテンツが見つかりませんでした。選択するタグを減らして、もう一度お試しください。</p>
+					</div>
 				</div>
-				<div class="filter-empty" data-filter-empty hidden><p><strong>該当するアトラクションが見つかりませんでした。</strong><br>キーワードやカテゴリーを変えて、もう一度お試しください。</p></div><noscript><p class="notice">JavaScriptが無効なため、全8件を表示しています。</p></noscript>
-			</div>
-			<div class="ui-demo-notes"><section><h3>どんな見せ方？</h3><p>キーワードや条件を指定して、多数の情報から必要なものだけを表示します。</p></section><section><h3>向いている用途</h3><ul><li>商品一覧</li><li>記事一覧</li><li>店舗検索</li><li>実績検索</li><li>施設検索</li><li>FAQ検索</li></ul></section><section><h3>期待できること</h3><p>情報量が多い場合でも、目的に合う内容へ短時間で到達しやすくなります。</p></section><section><h3>設計のポイント</h3><p>ユーザーが理解できる絞り込み条件を用意し、選択中の条件、該当件数、解除方法を常に分かるようにすることが重要です。</p></section><section><h3>関連する表現</h3><ul><li>PARK INDEX</li><li>タグ／チップ</li><li>ソート</li><li>オートコンプリート</li></ul></section></div>
+				<div class="filter-results" data-filter-results>
+					<article class="filter-result" data-filter-item data-filter-tags="ui animation"><h3>LIGHT ARROW RIDE</h3><p class="filter-result__meta">UI・アニメーション ／ UI COLLECTION</p><p>光る矢印と小さな反応で、視線誘導を体験するライド。</p></article>
+					<article class="filter-result" data-filter-item data-filter-tags="ui interaction"><h3>FLIP CHARACTER LAB</h3><p class="filter-result__meta">UI・インタラクション ／ UI COLLECTION</p><p>カードの表裏を切り替えて、キャラクターを知る研究室。</p></article>
+					<article class="filter-result" data-filter-item data-filter-tags="visual animation"><h3>WORD FOREST</h3><p class="filter-result__meta">ビジュアル・アニメーション ／ VISUAL PLAYGROUND</p><p>言葉が枝分かれしながら広がる、不思議な森。</p></article>
+					<article class="filter-result" data-filter-item data-filter-tags="visual animation"><h3>TYPOGRAPHY PARADE</h3><p class="filter-result__meta">ビジュアル・アニメーション ／ VISUAL PLAYGROUND</p><p>文字の大きさや動きが次々と変化するパレード。</p></article>
+					<article class="filter-result" data-filter-item data-filter-tags="data interaction"><h3>MOTION METER</h3><p class="filter-result__meta">データ・インタラクション ／ DATA MOTION</p><p>みんなのアクションで達成ゲージがたまる研究施設。</p></article>
+					<article class="filter-result" data-filter-item data-filter-tags="data animation"><h3>NUMBER TOWER</h3><p class="filter-result__meta">データ・アニメーション ／ DATA MOTION</p><p>数字の変化をカウントアップで観測するタワー。</p></article>
+					<article class="filter-result" data-filter-item data-filter-tags="story animation"><h3>STORY TRAIN</h3><p class="filter-result__meta">ストーリー・アニメーション ／ STORY EXPERIENCE</p><p>物語に沿って車窓の景色が変化する列車。</p></article>
+					<article class="filter-result" data-filter-item data-filter-tags="story interaction"><h3>SCROLL JOURNEY</h3><p class="filter-result__meta">ストーリー・インタラクション ／ STORY EXPERIENCE</p><p>スクロールに合わせて場面が進む体験型ツアー。</p></article>
+				</div>
+				<noscript><p class="notice">コンテンツの絞り込みにはJavaScriptを使用します。現在はすべてのコンテンツを表示しています。</p></noscript>
+			</form>
+			<div class="ui-demo-notes"><section><h3>どんな見せ方？</h3><p>タグや条件を指定して、多数の情報から必要なものだけを表示します。</p></section><section><h3>向いている用途</h3><ul><li>商品一覧</li><li>記事一覧</li><li>店舗検索</li><li>実績検索</li><li>施設検索</li><li>FAQ検索</li></ul></section><section><h3>期待できること</h3><p>情報量が多い場合でも、目的に合う内容へ短時間で到達しやすくなります。</p></section><section><h3>設計のポイント</h3><p>ユーザーが理解できる絞り込み条件を用意し、選択中の条件、該当件数、解除方法を常に分かるようにすることが重要です。</p></section><section><h3>関連する表現</h3><ul><li>PARK INDEX</li><li>タグ／チップ</li><li>ソート</li><li>オートコンプリート</li></ul></section></div>
 		</section>
 
 		<section id="before-after" class="ui-demo" aria-labelledby="before-after-title">
@@ -232,6 +311,83 @@
 				<section><h3>期待できること</h3><p>説明文だけでは伝わりにくい変化を、ユーザー自身の操作によって直感的に理解してもらえます。</p></section>
 				<section><h3>設計のポイント</h3><p>見た目の変化だけでなく、何がどのように改善されたのかをラベルや補足文でも伝えることが重要です。</p><p>比較する2つの素材は、同じサイズ・同じ構図・同じ位置関係で用意すると違いを理解しやすくなります。</p></section>
 				<section><h3>関連する表現</h3><ul><li>スライダー／カルーセル</li><li>画像ギャラリー</li><li>ケーススタディ</li><li>リニューアル実績</li></ul></section>
+			</div>
+		</section>
+
+		<section id="choice-diagnosis" class="ui-demo" aria-labelledby="choice-diagnosis-title">
+			<header class="ui-demo__header">
+				<p class="section-label">CHOICE-BASED DIAGNOSIS</p>
+				<h2 id="choice-diagnosis-title">選択式診断</h2>
+				<p>いくつかの質問に回答すると、選択した条件に応じて自分に合うWeb施策と、その理由が表示されるUIです。</p>
+			</header>
+			<form class="choice-diagnosis" data-choice-diagnosis>
+				<div class="choice-diagnosis__questions">
+					<h3>今の目的に合うWeb施策を見つける</h3>
+					<p class="choice-diagnosis__instruction">3つの質問に回答し、「診断結果を確認する」を押すと、選択した条件に応じた施策と理由が表示されます。</p>
+					<fieldset aria-describedby="diagnosis-purpose-error" data-diagnosis-question="purpose">
+						<legend>質問1：今回、最も重視したい目的は？</legend>
+						<p id="diagnosis-purpose-error" class="choice-diagnosis__question-error" data-diagnosis-question-error hidden>この質問に回答してください</p>
+						<div class="choice-diagnosis__options">
+							<label><input type="radio" name="diagnosis-purpose" value="awareness">認知を広げたい</label>
+							<label><input type="radio" name="diagnosis-purpose" value="understanding">商品やサービスの理解を深めたい</label>
+							<label><input type="radio" name="diagnosis-purpose" value="participation">参加や応募を増やしたい</label>
+						</div>
+					</fieldset>
+					<fieldset aria-describedby="diagnosis-experience-error" data-diagnosis-question="experience">
+						<legend>質問2：ユーザーにどんな体験をしてほしい？</legend>
+						<p id="diagnosis-experience-error" class="choice-diagnosis__question-error" data-diagnosis-question-error hidden>この質問に回答してください</p>
+						<div class="choice-diagnosis__options">
+							<label><input type="radio" name="diagnosis-experience" value="quick">短時間で気軽に楽しんでほしい</label>
+							<label><input type="radio" name="diagnosis-experience" value="personal">自分ごととして考えてほしい</label>
+							<label><input type="radio" name="diagnosis-experience" value="deep">内容をじっくり理解してほしい</label>
+						</div>
+					</fieldset>
+					<fieldset aria-describedby="diagnosis-social-error" data-diagnosis-question="social">
+						<legend>質問3：SNSとの連動はどの程度重視する？</legend>
+						<p id="diagnosis-social-error" class="choice-diagnosis__question-error" data-diagnosis-question-error hidden>この質問に回答してください</p>
+						<div class="choice-diagnosis__options">
+							<label><input type="radio" name="diagnosis-social" value="high">積極的に拡散へつなげたい</label>
+							<label><input type="radio" name="diagnosis-social" value="medium">参加のきっかけとして活用したい</label>
+							<label><input type="radio" name="diagnosis-social" value="low">Webサイト内の体験を優先したい</label>
+						</div>
+					</fieldset>
+					<p class="choice-diagnosis__form-error" role="alert" data-diagnosis-form-error hidden>未回答の質問があります。すべての質問に回答してから、診断結果をご確認ください。</p>
+					<div class="choice-diagnosis__actions">
+						<button class="choice-diagnosis__confirm" type="submit">診断結果を確認する</button>
+						<button class="choice-diagnosis__reset" type="reset">回答をリセットする</button>
+					</div>
+				</div>
+				<section class="choice-diagnosis__result" data-diagnosis-result>
+					<p class="choice-diagnosis__prompt" data-diagnosis-prompt>3つの質問に回答すると、今の目的に合うWeb施策とその理由を確認できます。</p>
+					<div data-diagnosis-details hidden>
+						<h3 id="diagnosis-result-title" tabindex="-1">あなたに合う施策</h3>
+						<p class="choice-diagnosis__result-name" data-diagnosis-result-name></p>
+						<p data-diagnosis-description></p>
+						<div class="choice-diagnosis__purposes">
+							<h4>向いている目的</h4>
+							<ul data-diagnosis-purposes></ul>
+						</div>
+						<div class="choice-diagnosis__reason">
+							<h4>今回の結果になった理由</h4>
+							<p data-diagnosis-reason></p>
+						</div>
+						<div class="choice-diagnosis__answers">
+							<h4>選択した回答</h4>
+							<p data-diagnosis-summary></p>
+						</div>
+					</div>
+					<p class="choice-diagnosis__changed" role="status" data-diagnosis-changed hidden>回答内容が変更されています。もう一度「診断結果を確認する」を押すと、結果が更新されます。</p>
+					<p class="screen-reader-text" aria-live="polite" aria-atomic="true" data-diagnosis-announcement></p>
+				</section>
+				<p class="choice-diagnosis__notice">この診断は、Web施策を検討する際の考え方を体験するための簡易デモです。実際の施策は、目的、ターゲット、予算、実施期間などを踏まえて設計します。</p>
+				<noscript><p class="notice choice-diagnosis__noscript">診断結果の表示にはJavaScriptを使用します。質問と選択肢をご確認いただけます。</p></noscript>
+			</form>
+			<div class="ui-demo-notes">
+				<section><h3>どんな見せ方？</h3><p>いくつかの質問に回答して確定すると、選択した条件に応じた結果と、その理由が表示されるUIです。</p></section>
+				<section><h3>向いている用途</h3><ul><li>タイプ診断</li><li>商品やプランの提案</li><li>コンテンツのレコメンド</li><li>学習コンテンツ</li><li>セルフチェック</li><li>相談前の簡易ヒアリング</li></ul></section>
+				<section><h3>期待できること</h3><p>質問へ回答する体験を通じて、ユーザーがテーマを自分ごととして考えやすくなります。</p><p>結果だけでなく、回答に応じた理由を示すことで、納得感を持って次の情報や行動へ進みやすくなります。</p></section>
+				<section><h3>設計のポイント</h3><p>質問数や選択肢を増やしすぎると、回答途中の離脱につながります。</p><p>結果の精度だけを追求するのではなく、ユーザーが負担なく回答できる量へ絞ることが重要です。</p><p>結果ごとに理由や次の行動を示し、診断を受けて終わるのではなく、その後のコンテンツやコンバージョン導線へつなげる設計が必要です。</p></section>
+				<section><h3>関連する表現</h3><ul><li>タイプ診断</li><li>選択式コンテンツ</li><li>条件分岐</li><li>レコメンド</li><li>セルフチェック</li></ul></section>
 			</div>
 		</section>
 

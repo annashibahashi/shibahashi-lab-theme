@@ -350,29 +350,38 @@ document.addEventListener('DOMContentLoaded', () => {
 		showSlide(0);
 	};
 
-	const initAttractionFilter = (filter) => {
-		const queryInput = filter.querySelector('[data-filter-query]');
-		const categoryButtons = Array.from(filter.querySelectorAll('[data-filter-category]'));
+	const initMultiTagFilter = (filter) => {
+		const groups = Array.from(filter.querySelectorAll('[data-filter-group]'));
 		const items = Array.from(filter.querySelectorAll('[data-filter-item]'));
 		const resultCount = filter.querySelector('[data-filter-count]');
-		const resetButton = filter.querySelector('[data-filter-reset]');
+		const selectionSummary = filter.querySelector('[data-filter-selection]');
 		const emptyState = filter.querySelector('[data-filter-empty]');
 
-		if (!queryInput || !categoryButtons.length || !items.length || !resultCount || !resetButton || !emptyState) {
+		if (!groups.length || !items.length || !resultCount || !selectionSummary || !emptyState) {
 			return;
 		}
 
-		let selectedCategory = 'all';
-		const normalizeText = (value) => value.normalize('NFKC').trim().toLocaleLowerCase('ja-JP');
+		const groupTags = groups.map((group) => Array.from(group.querySelectorAll('[data-filter-tag]')));
+		const allTags = groupTags.flat();
+		const itemTags = new Map(items.map((item) => [
+			item,
+			new Set((item.dataset.filterTags || '').split(/\s+/).filter(Boolean)),
+		]));
+
+		if (!allTags.length) {
+			return;
+		}
 
 		const updateResults = () => {
-			const query = normalizeText(queryInput.value);
+			const selectedByGroup = groupTags.map((tags) => tags.filter((tag) => tag.checked));
+			const selectedTags = selectedByGroup.flat();
 			let visibleCount = 0;
 
 			items.forEach((item) => {
-				const matchesKeyword = !query || normalizeText(item.textContent).includes(query);
-				const matchesCategory = selectedCategory === 'all' || item.dataset.category === selectedCategory;
-				const isVisible = matchesKeyword && matchesCategory;
+				const tags = itemTags.get(item);
+				const isVisible = selectedByGroup.every((selectedInGroup) => (
+					!selectedInGroup.length || selectedInGroup.some((tag) => tags.has(tag.value))
+				));
 
 				item.hidden = !isVisible;
 				if (isVisible) {
@@ -380,29 +389,22 @@ document.addEventListener('DOMContentLoaded', () => {
 				}
 			});
 
-			resultCount.textContent = `${items.length}件中${visibleCount}件を表示`;
+			const selectedLabels = selectedTags.map((tag) => tag.closest('label')?.textContent.trim() || tag.value);
+			const isFiltered = selectedTags.length > 0;
+
+			resultCount.textContent = isFiltered
+				? `${visibleCount}件のコンテンツが見つかりました`
+				: `${visibleCount}件のコンテンツを表示しています`;
+			selectionSummary.textContent = `選択中：${isFiltered ? selectedLabels.join('、') : 'すべて'}`;
 			emptyState.hidden = visibleCount !== 0;
 		};
 
-		queryInput.addEventListener('input', updateResults);
-		categoryButtons.forEach((button) => {
-			button.addEventListener('click', () => {
-				selectedCategory = button.dataset.filterCategory;
-				categoryButtons.forEach((categoryButton) => {
-					categoryButton.setAttribute('aria-pressed', String(categoryButton === button));
-				});
-				updateResults();
-			});
+		allTags.forEach((tag) => {
+			tag.addEventListener('change', updateResults);
 		});
-
-		resetButton.addEventListener('click', () => {
-			queryInput.value = '';
-			selectedCategory = 'all';
-			categoryButtons.forEach((button) => {
-				button.setAttribute('aria-pressed', String(button.dataset.filterCategory === 'all'));
-			});
-			updateResults();
-			queryInput.focus();
+		filter.addEventListener('submit', (event) => event.preventDefault());
+		filter.addEventListener('reset', () => {
+			window.requestAnimationFrame(updateResults);
 		});
 
 		updateResults();
@@ -440,7 +442,485 @@ document.addEventListener('DOMContentLoaded', () => {
 		comparison.classList.add('is-enhanced');
 	};
 
+	const initChoiceDiagnosis = (diagnosis) => {
+		const questionGroups = Array.from(diagnosis.querySelectorAll('[data-diagnosis-question]'));
+		const resultContainer = diagnosis.querySelector('[data-diagnosis-result]');
+		const resultPrompt = diagnosis.querySelector('[data-diagnosis-prompt]');
+		const resultDetails = diagnosis.querySelector('[data-diagnosis-details]');
+		const resultTitle = diagnosis.querySelector('#diagnosis-result-title');
+		const resultName = diagnosis.querySelector('[data-diagnosis-result-name]');
+		const resultDescription = diagnosis.querySelector('[data-diagnosis-description]');
+		const resultPurposes = diagnosis.querySelector('[data-diagnosis-purposes]');
+		const resultReason = diagnosis.querySelector('[data-diagnosis-reason]');
+		const resultSummary = diagnosis.querySelector('[data-diagnosis-summary]');
+		const formError = diagnosis.querySelector('[data-diagnosis-form-error]');
+		const changedNotice = diagnosis.querySelector('[data-diagnosis-changed]');
+		const announcement = diagnosis.querySelector('[data-diagnosis-announcement]');
+
+		if (!questionGroups.length || !resultContainer || !resultPrompt || !resultDetails || !resultTitle || !resultName || !resultDescription || !resultPurposes || !resultReason || !resultSummary || !formError || !changedNotice || !announcement) {
+			return;
+		}
+
+		const diagnosisResults = {
+			socialCampaign: {
+				name: 'SNS参加型キャンペーン',
+				description: 'SNS上で参加しやすい仕組みを設け、ユーザーの投稿や反応を通じて認知を広げる施策です。',
+				purposes: [
+					'短期間で認知を広げたい',
+					'SNS上の話題やUGCを生み出したい',
+					'参加への心理的ハードルを下げたい',
+				],
+			},
+			diagnosisContent: {
+				name: '診断コンテンツ',
+				description: '質問への回答を通じて、ユーザー自身に関係する結果を返し、商品やテーマを自分ごととして捉えてもらう施策です。',
+				purposes: [
+					'ユーザーの興味を引き出したい',
+					'自分ごと化を促したい',
+					'結果のシェアへつなげたい',
+				],
+			},
+			interactiveContent: {
+				name: 'インタラクティブコンテンツ',
+				description: '操作や変化を伴う体験を通じて、商品やサービスの特徴を感覚的に理解してもらう施策です。',
+				purposes: [
+					'説明だけでは伝わりにくい価値を体験化したい',
+					'ユーザーの記憶に残る接点を作りたい',
+					'ブランドらしいWeb体験を作りたい',
+				],
+			},
+			informationLandingPage: {
+				name: '情報理解型ランディングページ',
+				description: 'ストーリーや情報の順番を設計し、ユーザーの理解と納得を段階的に深める施策です。',
+				purposes: [
+					'商品やサービスの特徴を丁寧に伝えたい',
+					'理解から検討、行動までの導線を作りたい',
+					'複数の訴求内容を整理して伝えたい',
+				],
+			},
+			applicationCampaign: {
+				name: '応募キャンペーン',
+				description: '明確な参加条件とインセンティブを設け、応募や購入などの具体的な行動を促す施策です。',
+				purposes: [
+					'応募数を増やしたい',
+					'購入や来店を参加条件にしたい',
+					'行動喚起を明確に設計したい',
+				],
+			},
+		};
+
+		const determineDiagnosis = ({ purpose, experience, social }) => {
+			if (purpose === 'participation') {
+				if (social === 'high') {
+					return {
+						key: 'socialCampaign',
+						reason: '参加数の獲得に加えてSNS上の拡散も重視しているため、SNS内で参加が完結または開始できるキャンペーンが適しています。',
+					};
+				}
+
+				return {
+					key: 'applicationCampaign',
+					reason: '応募や参加を最優先にしているため、参加条件とインセンティブを明確に設計できる応募キャンペーンが適しています。',
+				};
+			}
+
+			if (experience === 'personal') {
+				return {
+					key: 'diagnosisContent',
+					reason: '回答を通じてユーザー自身に関係する結果を返すことで、テーマや商品を自分ごととして捉えてもらいやすくなります。',
+				};
+			}
+
+			if (purpose === 'understanding' && experience === 'deep') {
+				return {
+					key: 'informationLandingPage',
+					reason: '情報を段階的に整理し、ストーリーに沿って伝えることで、特徴や価値への理解と納得を深めやすくなります。',
+				};
+			}
+
+			if (purpose === 'understanding' && experience === 'quick') {
+				return {
+					key: 'interactiveContent',
+					reason: '操作や視覚的な変化を取り入れることで、説明量を増やしすぎずに商品やサービスの特徴を体験として伝えられます。',
+				};
+			}
+
+			if (purpose === 'awareness' && (social === 'high' || social === 'medium')) {
+				return {
+					key: 'socialCampaign',
+					reason: '参加のしやすさとSNS上での接触機会を組み合わせることで、短期間で認知を広げやすくなります。',
+				};
+			}
+
+			return {
+				key: 'interactiveContent',
+				reason: 'Webサイト内で楽しめる体験を設けることで、ユーザーとの接触時間を増やし、印象に残るコミュニケーションを作れます。',
+			};
+		};
+
+		let hasConfirmedResult = false;
+
+		const setQuestionError = (group, hasError) => {
+			const questionError = group.querySelector('[data-diagnosis-question-error]');
+			group.classList.toggle('has-error', hasError);
+
+			if (hasError) {
+				group.setAttribute('aria-invalid', 'true');
+			} else {
+				group.removeAttribute('aria-invalid');
+			}
+
+			if (questionError) {
+				questionError.hidden = !hasError;
+			}
+		};
+
+		const getCheckedAnswers = () => questionGroups.map((group) => group.querySelector('input[type="radio"]:checked'));
+
+		const clearResult = () => {
+			resultName.textContent = '';
+			resultDescription.textContent = '';
+			resultReason.textContent = '';
+			resultSummary.textContent = '';
+			resultPurposes.replaceChildren();
+			resultDetails.hidden = true;
+			resultPrompt.hidden = false;
+			changedNotice.hidden = true;
+		};
+
+		const showDiagnosisResult = (checkedAnswers) => {
+			const answers = Object.fromEntries(questionGroups.map((group, index) => [
+				group.dataset.diagnosisQuestion,
+				checkedAnswers[index].value,
+			]));
+			const selectedLabels = checkedAnswers.map((answer) => answer.closest('label')?.textContent.trim() || answer.value);
+			const diagnosisDecision = determineDiagnosis(answers);
+			const selectedResult = diagnosisResults[diagnosisDecision.key];
+
+			resultName.textContent = selectedResult.name;
+			resultDescription.textContent = selectedResult.description;
+			resultReason.textContent = diagnosisDecision.reason;
+			resultSummary.textContent = selectedLabels.join(' ／ ');
+
+			const purposeItems = selectedResult.purposes.map((purpose) => {
+				const item = document.createElement('li');
+				item.textContent = purpose;
+				return item;
+			});
+			resultPurposes.replaceChildren(...purposeItems);
+			resultPrompt.hidden = true;
+			resultDetails.hidden = false;
+			changedNotice.hidden = true;
+			hasConfirmedResult = true;
+			announcement.textContent = `診断結果は「${selectedResult.name}」です。${diagnosisDecision.reason}`;
+
+			const resultBounds = resultContainer.getBoundingClientRect();
+			const isOutsideViewport = resultBounds.top < 0 || resultBounds.bottom > document.documentElement.clientHeight;
+
+			if (isOutsideViewport) {
+				const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+				resultContainer.scrollIntoView({
+					behavior: reduceMotion ? 'auto' : 'smooth',
+					block: 'nearest',
+				});
+			}
+		};
+
+		questionGroups.forEach((group) => {
+			group.querySelectorAll('input[type="radio"]').forEach((option) => {
+				option.addEventListener('change', () => {
+					setQuestionError(group, false);
+
+					if (getCheckedAnswers().every(Boolean)) {
+						formError.hidden = true;
+					}
+
+					if (hasConfirmedResult) {
+						changedNotice.hidden = false;
+					}
+				});
+			});
+		});
+		diagnosis.addEventListener('submit', (event) => {
+			event.preventDefault();
+
+			const checkedAnswers = getCheckedAnswers();
+			const unansweredGroups = questionGroups.filter((group, index) => !checkedAnswers[index]);
+
+			questionGroups.forEach((group) => {
+				setQuestionError(group, unansweredGroups.includes(group));
+			});
+
+			if (unansweredGroups.length) {
+				formError.hidden = false;
+				clearResult();
+				hasConfirmedResult = false;
+				unansweredGroups[0].querySelector('input[type="radio"]')?.focus();
+				return;
+			}
+
+			formError.hidden = true;
+			showDiagnosisResult(checkedAnswers);
+		});
+		diagnosis.addEventListener('reset', () => {
+			window.requestAnimationFrame(() => {
+				questionGroups.forEach((group) => setQuestionError(group, false));
+				formError.hidden = true;
+				hasConfirmedResult = false;
+				clearResult();
+				announcement.textContent = '回答と診断結果をリセットしました。';
+			});
+		});
+
+		clearResult();
+	};
+
 	document.querySelectorAll('[data-carousel]').forEach(initCarousel);
-	document.querySelectorAll('[data-attraction-filter]').forEach(initAttractionFilter);
+	document.querySelectorAll('[data-multi-tag-filter]').forEach(initMultiTagFilter);
 	document.querySelectorAll('[data-before-after]').forEach(initBeforeAfter);
+	document.querySelectorAll('[data-choice-diagnosis]').forEach(initChoiceDiagnosis);
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+	const hoverPointerMedia = window.matchMedia('(hover: hover) and (pointer: fine)');
+	const reducedMotionMedia = window.matchMedia('(prefers-reduced-motion: reduce)');
+	const root = document.documentElement;
+	const activeSparkles = new Set();
+	const minimumDistance = 14;
+	const maximumSparkles = 10;
+	const fallbackLifetime = 800;
+	let isEnabled = false;
+	let pawCursor = null;
+	let lastSparkleX = null;
+	let lastSparkleY = null;
+	let latestPoint = null;
+	let animationFrameId = null;
+
+	const removeSparkle = (sparkle) => {
+		activeSparkles.delete(sparkle);
+		sparkle.remove();
+	};
+
+	const removeAllSparkles = () => {
+		activeSparkles.forEach((sparkle) => sparkle.remove());
+		activeSparkles.clear();
+	};
+
+	const createPawCursor = () => {
+		const cursor = document.createElement('span');
+		const icon = document.createElement('span');
+		const pad = document.createElement('span');
+
+		cursor.className = 'custom-paw-cursor is-hidden';
+		cursor.setAttribute('aria-hidden', 'true');
+		icon.className = 'custom-paw-cursor__icon';
+		pad.className = 'custom-paw-cursor__pad';
+		icon.append(pad);
+
+		for (let index = 0; index < 4; index += 1) {
+			const toe = document.createElement('span');
+			toe.className = 'custom-paw-cursor__toe';
+			icon.append(toe);
+		}
+
+		cursor.append(icon);
+		document.body.append(cursor);
+		return cursor;
+	};
+
+	const createSparkle = ({ x, y }) => {
+		if (!isEnabled || activeSparkles.size >= maximumSparkles || !document.body) {
+			return;
+		}
+
+		const sparkle = document.createElement('span');
+		sparkle.className = 'cursor-sparkle';
+		sparkle.setAttribute('aria-hidden', 'true');
+		sparkle.style.left = `${x + 8}px`;
+		sparkle.style.top = `${y + 12}px`;
+		activeSparkles.add(sparkle);
+		document.body.append(sparkle);
+
+		const fallbackId = window.setTimeout(() => removeSparkle(sparkle), fallbackLifetime);
+		sparkle.addEventListener('animationend', () => {
+			window.clearTimeout(fallbackId);
+			removeSparkle(sparkle);
+		}, { once: true });
+
+		lastSparkleX = x;
+		lastSparkleY = y;
+	};
+
+	const renderLatestPoint = () => {
+		animationFrameId = null;
+
+		if (!latestPoint || !pawCursor) {
+			return;
+		}
+
+		const point = latestPoint;
+		const isSuspended = root.classList.contains('is-custom-cursor-suspended');
+		latestPoint = null;
+		pawCursor.style.setProperty('--paw-cursor-x', `${point.x}px`);
+		pawCursor.style.setProperty('--paw-cursor-y', `${point.y}px`);
+		pawCursor.classList.toggle('is-hovering-interactive', point.isInteractive);
+		pawCursor.classList.toggle('is-hidden', point.isDisabled || isSuspended);
+		root.classList.add('has-custom-paw-cursor');
+
+		if (point.isDisabled || isSuspended || point.buttons !== 0) {
+			return;
+		}
+
+		if (lastSparkleX !== null && lastSparkleY !== null) {
+			const distance = Math.hypot(point.x - lastSparkleX, point.y - lastSparkleY);
+			if (distance < minimumDistance) {
+				return;
+			}
+		}
+
+		createSparkle(point);
+	};
+
+	const isDisabledTarget = (target) => {
+		if (!(target instanceof Element)) {
+			return true;
+		}
+
+		return Boolean(target.closest(
+			'input, textarea, select, [contenteditable="true"], iframe, dialog, [data-before-after], .carousel__viewport, .is-custom-cursor-disabled'
+		));
+	};
+
+	const isInteractiveTarget = (target) => {
+		if (!(target instanceof Element)) {
+			return false;
+		}
+
+		return Boolean(target.closest(
+			'a[href], button:not([disabled]), summary, [role="button"], [role="link"]'
+		));
+	};
+
+	const handlePointerMove = (event) => {
+		if (!isEnabled || event.pointerType !== 'mouse') {
+			return;
+		}
+
+		latestPoint = {
+			x: event.clientX,
+			y: event.clientY,
+			buttons: event.buttons,
+			isDisabled: isDisabledTarget(event.target),
+			isInteractive: isInteractiveTarget(event.target),
+		};
+
+		if (animationFrameId === null) {
+			animationFrameId = window.requestAnimationFrame(renderLatestPoint);
+		}
+	};
+
+	const handlePointerDown = (event) => {
+		if (!isEnabled || event.pointerType !== 'mouse' || !pawCursor) {
+			return;
+		}
+
+		if (isDisabledTarget(event.target) || !isInteractiveTarget(event.target)) {
+			root.classList.add('is-custom-cursor-suspended');
+			pawCursor.classList.add('is-hidden');
+			removeAllSparkles();
+			return;
+		}
+
+		pawCursor.classList.add('is-pointer-down');
+	};
+
+	const restorePointerState = (event) => {
+		root.classList.remove('is-custom-cursor-suspended');
+		pawCursor?.classList.remove('is-pointer-down');
+
+		if (event?.pointerType === 'mouse' && pawCursor) {
+			const isDisabled = isDisabledTarget(event.target);
+			pawCursor.classList.toggle('is-hidden', isDisabled);
+			pawCursor.classList.toggle('is-hovering-interactive', !isDisabled && isInteractiveTarget(event.target));
+		}
+	};
+
+	const hidePawCursor = () => {
+		root.classList.remove('has-custom-paw-cursor', 'is-custom-cursor-suspended');
+		pawCursor?.classList.add('is-hidden');
+		pawCursor?.classList.remove('is-pointer-down');
+	};
+
+	const handlePointerOut = (event) => {
+		if (!event.relatedTarget) {
+			hidePawCursor();
+		}
+	};
+
+	const handleVisibilityChange = () => {
+		if (document.hidden) {
+			hidePawCursor();
+		}
+	};
+
+	const addCursorListeners = () => {
+		document.addEventListener('pointermove', handlePointerMove, { passive: true });
+		document.addEventListener('pointerdown', handlePointerDown, { passive: true });
+		document.addEventListener('pointerup', restorePointerState, { passive: true });
+		document.addEventListener('pointercancel', restorePointerState, { passive: true });
+		document.addEventListener('pointerout', handlePointerOut, { passive: true });
+		document.addEventListener('visibilitychange', handleVisibilityChange);
+		window.addEventListener('blur', hidePawCursor);
+	};
+
+	const removeCursorListeners = () => {
+		document.removeEventListener('pointermove', handlePointerMove);
+		document.removeEventListener('pointerdown', handlePointerDown);
+		document.removeEventListener('pointerup', restorePointerState);
+		document.removeEventListener('pointercancel', restorePointerState);
+		document.removeEventListener('pointerout', handlePointerOut);
+		document.removeEventListener('visibilitychange', handleVisibilityChange);
+		window.removeEventListener('blur', hidePawCursor);
+	};
+
+	const updateCustomPawCursor = () => {
+		const shouldEnable = hoverPointerMedia.matches && !reducedMotionMedia.matches;
+
+		if (shouldEnable === isEnabled) {
+			return;
+		}
+
+		isEnabled = shouldEnable;
+		lastSparkleX = null;
+		lastSparkleY = null;
+		latestPoint = null;
+
+		if (animationFrameId !== null) {
+			window.cancelAnimationFrame(animationFrameId);
+			animationFrameId = null;
+		}
+
+		if (isEnabled) {
+			pawCursor = createPawCursor();
+			addCursorListeners();
+		} else {
+			removeCursorListeners();
+			root.classList.remove('has-custom-paw-cursor', 'is-custom-cursor-suspended');
+			pawCursor?.remove();
+			pawCursor = null;
+			removeAllSparkles();
+		}
+	};
+
+	const watchMediaChange = (mediaQuery) => {
+		if (typeof mediaQuery.addEventListener === 'function') {
+			mediaQuery.addEventListener('change', updateCustomPawCursor);
+		} else {
+			mediaQuery.addListener(updateCustomPawCursor);
+		}
+	};
+
+	watchMediaChange(hoverPointerMedia);
+	watchMediaChange(reducedMotionMedia);
+	updateCustomPawCursor();
 });
