@@ -408,6 +408,39 @@ document.addEventListener('DOMContentLoaded', () => {
 		updateResults();
 	};
 
+	const initBeforeAfter = (comparison) => {
+		const range = comparison.querySelector('[data-before-after-range]');
+		const valueText = comparison.querySelector('[data-before-after-value]');
+
+		if (!range || !valueText) {
+			return;
+		}
+
+		const updateComparison = () => {
+			const minimum = Number(range.min);
+			const maximum = Number(range.max);
+			const inputValue = Number(range.value);
+
+			if (!Number.isFinite(minimum) || !Number.isFinite(maximum) || !Number.isFinite(inputValue)) {
+				return;
+			}
+
+			const currentValue = Math.min(maximum, Math.max(minimum, inputValue));
+			const displayValue = String(currentValue);
+			const accessibleValue = `改善後を${displayValue}％表示`;
+
+			comparison.style.setProperty('--after-position', `${currentValue}%`);
+			valueText.textContent = accessibleValue;
+			range.setAttribute('aria-valuenow', displayValue);
+			range.setAttribute('aria-valuetext', accessibleValue);
+		};
+
+		range.addEventListener('input', updateComparison);
+		updateComparison();
+		comparison.classList.add('is-enhanced');
+	};
+
 	document.querySelectorAll('[data-carousel]').forEach(initCarousel);
 	document.querySelectorAll('[data-attraction-filter]').forEach(initAttractionFilter);
+	document.querySelectorAll('[data-before-after]').forEach(initBeforeAfter);
 });

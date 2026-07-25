@@ -13,7 +13,7 @@
 		</header>
 
 		<nav class="ui-demo-index" aria-label="UIデモのページ内目次">
-			<h2 class="ui-demo-index__title">7種類のUIデモ</h2>
+			<h2 class="ui-demo-index__title">8種類のUIデモ</h2>
 			<ol class="ui-demo-index__list">
 				<li><a href="#card-layout">カードレイアウト</a></li>
 				<li><a href="#flip-card">フリップカード</a></li>
@@ -22,6 +22,7 @@
 				<li><a href="#modal">モーダル</a></li>
 				<li><a href="#carousel">スライダー／カルーセル</a></li>
 				<li><a href="#attraction-filter">検索・フィルター</a></li>
+				<li><a href="#before-after">ビフォー・アフター比較</a></li>
 			</ol>
 		</nav>
 
@@ -170,6 +171,68 @@
 				<div class="filter-empty" data-filter-empty hidden><p><strong>該当するアトラクションが見つかりませんでした。</strong><br>キーワードやカテゴリーを変えて、もう一度お試しください。</p></div><noscript><p class="notice">JavaScriptが無効なため、全8件を表示しています。</p></noscript>
 			</div>
 			<div class="ui-demo-notes"><section><h3>どんな見せ方？</h3><p>キーワードや条件を指定して、多数の情報から必要なものだけを表示します。</p></section><section><h3>向いている用途</h3><ul><li>商品一覧</li><li>記事一覧</li><li>店舗検索</li><li>実績検索</li><li>施設検索</li><li>FAQ検索</li></ul></section><section><h3>期待できること</h3><p>情報量が多い場合でも、目的に合う内容へ短時間で到達しやすくなります。</p></section><section><h3>設計のポイント</h3><p>ユーザーが理解できる絞り込み条件を用意し、選択中の条件、該当件数、解除方法を常に分かるようにすることが重要です。</p></section><section><h3>関連する表現</h3><ul><li>PARK INDEX</li><li>タグ／チップ</li><li>ソート</li><li>オートコンプリート</li></ul></section></div>
+		</section>
+
+		<section id="before-after" class="ui-demo" aria-labelledby="before-after-title">
+			<header class="ui-demo__header">
+				<p class="section-label">BEFORE &amp; AFTER</p>
+				<h2 id="before-after-title">ビフォー・アフター比較</h2>
+				<p>2つの状態を同じ位置で重ね、境界を動かしながら違いを比較できるUIです。</p>
+			</header>
+			<div class="before-after" data-before-after style="--after-position: 50%;">
+				<div class="before-after__preview" role="group" aria-label="SINQ WEB PARKの案内ページ改善比較">
+					<article class="before-after__panel before-after__panel--before" aria-label="BEFORE：情報が整理されていない案内ページ">
+						<p class="before-after__panel-label">BEFORE</p>
+						<div class="mock-guide-page mock-guide-page--before">
+							<div class="mock-guide-page__bar"><span>SINQ WEB PARK</span><span>GUIDE</span></div>
+							<div class="mock-guide-page__content">
+								<p class="mock-guide-page__eyebrow">PARK GUIDE</p>
+								<h3>はじめてのSINQ WEB PARK</h3>
+								<p class="mock-guide-page__lead">パークの楽しみ方と各エリアをご案内します。</p>
+								<div class="mock-guide-page__items">
+									<p>UIを体験する</p>
+									<p>ビジュアルを楽しむ</p>
+									<p>物語を巡る</p>
+								</div>
+								<span class="mock-guide-page__cta">パークを探索する</span>
+							</div>
+						</div>
+					</article>
+					<article class="before-after__panel before-after__panel--after" aria-label="AFTER：視線誘導と情報設計を改善した案内ページ">
+						<p class="before-after__panel-label">AFTER</p>
+						<div class="mock-guide-page mock-guide-page--after">
+							<div class="mock-guide-page__bar"><span>SINQ WEB PARK</span><span>GUIDE</span></div>
+							<div class="mock-guide-page__content">
+								<p class="mock-guide-page__eyebrow">PARK GUIDE</p>
+								<h3>はじめてのSINQ WEB PARK</h3>
+								<p class="mock-guide-page__lead">パークの楽しみ方と各エリアをご案内します。</p>
+								<div class="mock-guide-page__items">
+									<p>UIを体験する</p>
+									<p>ビジュアルを楽しむ</p>
+									<p>物語を巡る</p>
+								</div>
+								<span class="mock-guide-page__cta">パークを探索する</span>
+							</div>
+						</div>
+					</article>
+					<div class="before-after__labels" aria-hidden="true"><span>BEFORE</span><span>AFTER</span></div>
+					<div class="before-after__divider" aria-hidden="true"><span>↔</span></div>
+					<input id="before-after-range" class="before-after__range" type="range" min="0" max="100" value="50" step="1" aria-describedby="before-after-instruction" aria-valuenow="50" aria-valuetext="改善後を50％表示" data-before-after-range>
+				</div>
+				<div class="before-after__controls">
+					<label for="before-after-range">改善後の表示範囲</label>
+					<p class="before-after__value" data-before-after-value>改善後を50％表示</p>
+					<p id="before-after-instruction" class="before-after__instruction">スライダーを左右に動かして、改善前と改善後を比較できます。マウスや指で操作できるほか、キーボードの左右矢印キーでも操作できます。</p>
+				</div>
+				<noscript><p class="notice">JavaScriptが無効なため、BEFOREとAFTERを並べて表示しています。</p></noscript>
+			</div>
+			<div class="ui-demo-notes">
+				<section><h3>どんな見せ方？</h3><p>2つの画像や画面を同じ位置に重ね、境界線を動かして変化や違いを直感的に見せます。</p></section>
+				<section><h3>向いている用途</h3><ul><li>Webサイトのリニューアル比較</li><li>写真の加工前後</li><li>商品の使用前後</li><li>空間や施設の改修前後</li><li>デザイン案の比較</li><li>データや景色の変化</li></ul></section>
+				<section><h3>期待できること</h3><p>説明文だけでは伝わりにくい変化を、ユーザー自身の操作によって直感的に理解してもらえます。</p></section>
+				<section><h3>設計のポイント</h3><p>見た目の変化だけでなく、何がどのように改善されたのかをラベルや補足文でも伝えることが重要です。</p><p>比較する2つの素材は、同じサイズ・同じ構図・同じ位置関係で用意すると違いを理解しやすくなります。</p></section>
+				<section><h3>関連する表現</h3><ul><li>スライダー／カルーセル</li><li>画像ギャラリー</li><li>ケーススタディ</li><li>リニューアル実績</li></ul></section>
+			</div>
 		</section>
 
 		<a class="text-link area-page__map-link" href="<?php echo esc_url(home_url('/#park-map')); ?>">TOPページの園内マップへ戻る</a>
