@@ -18,6 +18,8 @@
 				<li class="index-preview__item" data-index-name="タイポグラフィー" data-index-purpose="印象づくり"><a href="<?php echo esc_url(home_url('/visual-playground/#typography')); ?>">タイポグラフィー</a><span>VISUAL PLAYGROUND</span></li>
 				<li class="index-preview__item" data-index-name="達成ゲージ" data-index-purpose="進捗表示"><a href="<?php echo esc_url(home_url('/data-motion/#progress-meter')); ?>">達成ゲージ</a><span>DATA MOTION</span></li>
 				<li class="index-preview__item" data-index-name="スクロール連動" data-index-purpose="物語表現"><a href="<?php echo esc_url(home_url('/story-experience/#scroll-animation')); ?>">スクロール連動</a><span>STORY EXPERIENCE</span></li>
+				<li class="index-preview__item" data-index-name="スライダー カルーセル" data-index-purpose="情報切り替え"><a href="<?php echo esc_url(home_url('/ui-collection/#carousel')); ?>">スライダー／カルーセル</a><span>UI COLLECTION</span></li>
+				<li class="index-preview__item" data-index-name="検索 フィルター" data-index-purpose="情報絞り込み"><a href="<?php echo esc_url(home_url('/ui-collection/#attraction-filter')); ?>">検索・フィルター</a><span>UI COLLECTION</span></li>
 			</ul>
 		</section>
 		<a class="text-link area-page__map-link" href="<?php echo esc_url(home_url('/#park-map')); ?>">TOPページの園内マップへ戻る</a>

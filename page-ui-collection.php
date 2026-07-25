@@ -13,13 +13,15 @@
 		</header>
 
 		<nav class="ui-demo-index" aria-label="UIデモのページ内目次">
-			<h2 class="ui-demo-index__title">5種類のUIデモ</h2>
+			<h2 class="ui-demo-index__title">7種類のUIデモ</h2>
 			<ol class="ui-demo-index__list">
 				<li><a href="#card-layout">カードレイアウト</a></li>
 				<li><a href="#flip-card">フリップカード</a></li>
 				<li><a href="#tabs">タブ</a></li>
 				<li><a href="#accordion">アコーディオン</a></li>
 				<li><a href="#modal">モーダル</a></li>
+				<li><a href="#carousel">スライダー／カルーセル</a></li>
+				<li><a href="#attraction-filter">検索・フィルター</a></li>
 			</ol>
 		</nav>
 
@@ -132,8 +134,42 @@
 		</section>
 
 		<section id="modal" class="ui-demo" aria-labelledby="modal-demo-title">
-			<header class="ui-demo__header"><p class="section-label">MODAL</p><h2 id="modal-demo-title">アトラクション詳細モーダル</h2><p>カード一覧の「詳細を見る」から、ページを移動せずに追加情報を確認できます。</p></header>
-			<p class="notice">LIGHT ARROW RIDEのカードから体験してください。</p>
+			<header class="ui-demo__header"><p class="section-label">MODAL</p><h2 id="modal-demo-title">アトラクション詳細モーダル</h2><p>ページを移動せず、その場で追加情報を確認できる見せ方です。<br>下のボタンから、LIGHT ARROW RIDEの詳細を開いてみてください。</p></header>
+			<button class="button-link" type="button" data-modal-open="light-arrow-dialog">アトラクション詳細を見る</button>
+		</section>
+
+		<section id="carousel" class="ui-demo" aria-labelledby="carousel-title">
+			<header class="ui-demo__header"><p class="section-label">CAROUSEL</p><h2 id="carousel-title">スライダー／カルーセル</h2><p>複数の情報を横方向へ切り替えながら、限られた表示領域で順番に見せるUIです。</p><p class="carousel__instruction">前後ボタンやドットのほか、左右にスワイプまたはドラッグでも切り替えられます。</p></header>
+			<div class="carousel" data-carousel role="region" aria-roledescription="カルーセル" aria-label="SINQ WEB PARKのおすすめスポット">
+				<div class="carousel__viewport">
+					<article class="carousel__slide is-active" data-carousel-slide aria-label="1枚目：LIGHT GATE"><div class="carousel__visual carousel__visual--gate" role="img" aria-label="LIGHT GATEの仮ビジュアル">SPOT IMAGE</div><div class="carousel__body"><p class="section-label">PARK ENTRANCE</p><h3>LIGHT GATE</h3><p>光に包まれながらパークへ入る、未来のエントランス。</p></div></article>
+					<article class="carousel__slide" data-carousel-slide aria-label="2枚目：WORD FOREST"><div class="carousel__visual carousel__visual--forest" role="img" aria-label="WORD FORESTの仮ビジュアル">SPOT IMAGE</div><div class="carousel__body"><p class="section-label">VISUAL PLAYGROUND</p><h3>WORD FOREST</h3><p>言葉が枝分かれしながら育っていく、不思議な森。</p></div></article>
+					<article class="carousel__slide" data-carousel-slide aria-label="3枚目：MOTION TOWER"><div class="carousel__visual carousel__visual--tower" role="img" aria-label="MOTION TOWERの仮ビジュアル">SPOT IMAGE</div><div class="carousel__body"><p class="section-label">DATA MOTION</p><h3>MOTION TOWER</h3><p>パーク内の数字や変化を観測するタワー。</p></div></article>
+					<article class="carousel__slide" data-carousel-slide aria-label="4枚目：STORY TRAIN"><div class="carousel__visual carousel__visual--train" role="img" aria-label="STORY TRAINの仮ビジュアル">SPOT IMAGE</div><div class="carousel__body"><p class="section-label">STORY EXPERIENCE</p><h3>STORY TRAIN</h3><p>物語の進行に合わせて、車窓の景色が変化する列車。</p></div></article>
+				</div>
+				<div class="carousel__controls" data-carousel-controls hidden><button class="carousel__arrow" type="button" data-carousel-prev>前へ</button><p class="carousel__position" aria-label="現在のスライド"><span data-carousel-current>1</span> / 4</p><button class="carousel__arrow" type="button" data-carousel-next>次へ</button></div>
+				<div class="carousel__dots" data-carousel-dots hidden role="group" aria-label="表示するスポットを選ぶ"><button type="button" aria-label="1枚目を表示" aria-current="true"></button><button type="button" aria-label="2枚目を表示"></button><button type="button" aria-label="3枚目を表示"></button><button type="button" aria-label="4枚目を表示"></button></div>
+			</div>
+			<div class="ui-demo-notes"><section><h3>どんな見せ方？</h3><p>複数の画像や情報を、同じ領域内で順番に切り替えて表示します。</p></section><section><h3>向いている用途</h3><ul><li>キービジュアル</li><li>商品の特徴</li><li>実績紹介</li><li>施設紹介</li><li>写真ギャラリー</li><li>おすすめコンテンツ</li></ul></section><section><h3>期待できること</h3><p>限られた場所で複数の情報を見せながら、前後の内容へ興味を広げられます。</p></section><section><h3>設計のポイント</h3><p>重要な情報を自動再生だけに頼らず、現在位置と操作方法を明確にすることが重要です。すべての情報を確実に読ませたい場合は、カード一覧など別の見せ方も検討してください。</p></section><section><h3>関連する表現</h3><ul><li>カードレイアウト</li><li>ライトボックス</li><li>横スクロール</li></ul></section></div>
+		</section>
+
+		<section id="attraction-filter" class="ui-demo" aria-labelledby="attraction-filter-title">
+			<header class="ui-demo__header"><p class="section-label">SEARCH &amp; FILTER</p><h2 id="attraction-filter-title">検索・フィルター</h2><p>キーワードや条件から、目的に合う情報を絞り込むUIです。</p></header>
+			<div class="attraction-filter" data-attraction-filter>
+				<div class="attraction-filter__controls"><label for="attraction-keyword">アトラクションをキーワードで探す</label><input id="attraction-keyword" class="attraction-filter__input" type="search" placeholder="例：光、言葉、数字、ストーリー" data-filter-query><div class="filter-chips" role="group" aria-label="アトラクションのカテゴリー"><button type="button" aria-pressed="true" data-filter-category="all">すべて</button><button type="button" aria-pressed="false" data-filter-category="UIを体験">UIを体験</button><button type="button" aria-pressed="false" data-filter-category="ビジュアルを楽しむ">ビジュアルを楽しむ</button><button type="button" aria-pressed="false" data-filter-category="データを見る">データを見る</button><button type="button" aria-pressed="false" data-filter-category="ストーリーを巡る">ストーリーを巡る</button></div><div class="attraction-filter__summary"><p data-filter-count aria-live="polite">8件中8件を表示</p><button class="text-button" type="button" data-filter-reset>条件をリセット</button></div></div>
+				<div class="filter-results" data-filter-results>
+					<article class="filter-result" data-filter-item data-category="UIを体験"><h3>LIGHT ARROW RIDE</h3><p class="filter-result__meta">UIを体験 ／ UI COLLECTION</p><p>光る矢印と小さな反応で、視線誘導を体験するライド。</p></article>
+					<article class="filter-result" data-filter-item data-category="UIを体験"><h3>FLIP CHARACTER LAB</h3><p class="filter-result__meta">UIを体験 ／ UI COLLECTION</p><p>カードの表裏を切り替えて、キャラクターを知る研究室。</p></article>
+					<article class="filter-result" data-filter-item data-category="ビジュアルを楽しむ"><h3>WORD FOREST</h3><p class="filter-result__meta">ビジュアルを楽しむ ／ VISUAL PLAYGROUND</p><p>言葉が枝分かれしながら広がる、不思議な森。</p></article>
+					<article class="filter-result" data-filter-item data-category="ビジュアルを楽しむ"><h3>TYPOGRAPHY PARADE</h3><p class="filter-result__meta">ビジュアルを楽しむ ／ VISUAL PLAYGROUND</p><p>文字の大きさや動きが次々と変化するパレード。</p></article>
+					<article class="filter-result" data-filter-item data-category="データを見る"><h3>MOTION METER</h3><p class="filter-result__meta">データを見る ／ DATA MOTION</p><p>みんなのアクションで達成ゲージがたまる研究施設。</p></article>
+					<article class="filter-result" data-filter-item data-category="データを見る"><h3>NUMBER TOWER</h3><p class="filter-result__meta">データを見る ／ DATA MOTION</p><p>数字の変化をカウントアップで観測するタワー。</p></article>
+					<article class="filter-result" data-filter-item data-category="ストーリーを巡る"><h3>STORY TRAIN</h3><p class="filter-result__meta">ストーリーを巡る ／ STORY EXPERIENCE</p><p>物語に沿って車窓の景色が変化する列車。</p></article>
+					<article class="filter-result" data-filter-item data-category="ストーリーを巡る"><h3>SCROLL JOURNEY</h3><p class="filter-result__meta">ストーリーを巡る ／ STORY EXPERIENCE</p><p>スクロールに合わせて場面が進む体験型ツアー。</p></article>
+				</div>
+				<div class="filter-empty" data-filter-empty hidden><p><strong>該当するアトラクションが見つかりませんでした。</strong><br>キーワードやカテゴリーを変えて、もう一度お試しください。</p></div><noscript><p class="notice">JavaScriptが無効なため、全8件を表示しています。</p></noscript>
+			</div>
+			<div class="ui-demo-notes"><section><h3>どんな見せ方？</h3><p>キーワードや条件を指定して、多数の情報から必要なものだけを表示します。</p></section><section><h3>向いている用途</h3><ul><li>商品一覧</li><li>記事一覧</li><li>店舗検索</li><li>実績検索</li><li>施設検索</li><li>FAQ検索</li></ul></section><section><h3>期待できること</h3><p>情報量が多い場合でも、目的に合う内容へ短時間で到達しやすくなります。</p></section><section><h3>設計のポイント</h3><p>ユーザーが理解できる絞り込み条件を用意し、選択中の条件、該当件数、解除方法を常に分かるようにすることが重要です。</p></section><section><h3>関連する表現</h3><ul><li>PARK INDEX</li><li>タグ／チップ</li><li>ソート</li><li>オートコンプリート</li></ul></section></div>
 		</section>
 
 		<a class="text-link area-page__map-link" href="<?php echo esc_url(home_url('/#park-map')); ?>">TOPページの園内マップへ戻る</a>

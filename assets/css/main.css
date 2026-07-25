@@ -921,7 +921,7 @@ input:focus-visible {
 
 .ui-demo-index__list {
 	display: grid;
-	grid-template-columns: repeat(5, minmax(0, 1fr));
+	grid-template-columns: repeat(auto-fit, minmax(9rem, 1fr));
 	gap: 0.75rem;
 	margin: 0;
 	padding: 0;
@@ -1295,5 +1295,302 @@ html:not(.js) .flip-card__toggle {
 
 	.flip-card.is-flipped .flip-card__back {
 		visibility: visible;
+	}
+}
+
+.carousel {
+	max-width: 56rem;
+	margin-inline: auto;
+	overflow: hidden;
+	border: 1px solid var(--color-border);
+	border-radius: var(--radius-large);
+	background: var(--color-surface);
+	box-shadow: var(--shadow-card);
+}
+
+.carousel__controls[hidden],
+.carousel__dots[hidden],
+.carousel__slide[hidden],
+.filter-result[hidden],
+.filter-empty[hidden] {
+	display: none !important;
+}
+
+.carousel__viewport {
+	display: grid;
+	gap: 1rem;
+	padding: 1rem;
+}
+
+.carousel.is-enhanced .carousel__viewport {
+	display: block;
+	touch-action: pan-y;
+	cursor: grab;
+	user-select: none;
+}
+
+.carousel.is-dragging .carousel__viewport {
+	cursor: grabbing;
+	user-select: none;
+}
+
+.carousel__instruction {
+	margin-bottom: 0;
+	color: var(--color-muted);
+	font-size: 0.875rem;
+	font-weight: 700;
+}
+
+.carousel__slide {
+	display: grid;
+	grid-template-columns: minmax(14rem, 1.2fr) minmax(0, 1fr);
+	min-width: 0;
+	overflow: hidden;
+	border: 1px solid var(--color-border);
+	border-radius: var(--radius-medium);
+	background: var(--color-surface);
+}
+
+.carousel__visual {
+	display: grid;
+	min-height: 18rem;
+	place-items: center;
+	color: var(--color-muted);
+	font-size: 0.75rem;
+	font-weight: 900;
+	letter-spacing: 0.12em;
+}
+
+.carousel__visual--gate {
+	background: linear-gradient(135deg, #fff5ad, #b8fff4 50%, #bdb5ff);
+}
+
+.carousel__visual--forest {
+	background: linear-gradient(135deg, #c7ffd5, #8de1c0 55%, #e6ccff);
+}
+
+.carousel__visual--tower {
+	background: linear-gradient(135deg, #ffd2e7, #acc7ff 55%, #d6c5ff);
+}
+
+.carousel__visual--train {
+	background: linear-gradient(135deg, #ffe6ae, #ffb8db 55%, #b5d8ff);
+}
+
+.carousel__body {
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+	padding: clamp(1.5rem, 4vw, 2.5rem);
+}
+
+.carousel__body h3 {
+	margin: 0 0 0.75rem;
+	font-size: clamp(1.5rem, 4vw, 2.25rem);
+	line-height: 1.25;
+}
+
+.carousel__controls {
+	display: flex;
+	justify-content: center;
+	gap: 1rem;
+	align-items: center;
+	border-top: 1px solid var(--color-border);
+	padding: 1rem;
+}
+
+.carousel__arrow,
+.text-button {
+	border: 2px solid var(--color-primary);
+	border-radius: 999px;
+	background: var(--color-surface);
+	padding: 0.6rem 1rem;
+	color: var(--color-primary-dark);
+	font: inherit;
+	font-weight: 800;
+	cursor: pointer;
+}
+
+.carousel__arrow:hover,
+.carousel__arrow:focus-visible,
+.text-button:hover,
+.text-button:focus-visible {
+	background: var(--color-primary);
+	color: #ffffff;
+}
+
+.carousel__position {
+	min-width: 4rem;
+	margin: 0;
+	font-weight: 900;
+	text-align: center;
+}
+
+.carousel__dots {
+	display: flex;
+	justify-content: center;
+	gap: 0.65rem;
+	padding: 0 1rem 1.25rem;
+}
+
+.carousel__dots button {
+	position: relative;
+	width: 1rem;
+	height: 1rem;
+	border: 2px solid var(--color-primary);
+	border-radius: 50%;
+	background: var(--color-surface);
+	padding: 0;
+	cursor: pointer;
+}
+
+.carousel__dots button[aria-current="true"] {
+	background: var(--color-primary);
+	box-shadow: 0 0 0 3px var(--color-surface), 0 0 0 5px var(--color-primary);
+}
+
+.ui-demo-notes {
+	display: grid;
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+	gap: 1rem;
+	margin-top: 2rem;
+}
+
+.ui-demo-notes section {
+	border: 1px solid var(--color-border);
+	border-radius: var(--radius-small);
+	background: var(--color-surface-alt);
+	padding: 1.25rem;
+}
+
+.ui-demo-notes h3 {
+	margin-top: 0;
+}
+
+.ui-demo-notes ul {
+	margin-bottom: 0;
+}
+
+.attraction-filter__controls {
+	border: 1px solid var(--color-border);
+	border-radius: var(--radius-medium);
+	background: var(--color-surface-alt);
+	padding: clamp(1.25rem, 4vw, 2rem);
+}
+
+.attraction-filter__controls label {
+	display: block;
+	margin-bottom: 0.5rem;
+	font-weight: 800;
+}
+
+.attraction-filter__input {
+	width: 100%;
+	border: 2px solid var(--color-primary);
+	border-radius: 999px;
+	background: var(--color-surface);
+	padding: 0.85rem 1.1rem;
+	color: var(--color-text);
+	font: inherit;
+}
+
+.filter-chips {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.65rem;
+	margin-top: 1.25rem;
+}
+
+.filter-chips button {
+	border: 1px solid var(--color-primary);
+	border-radius: 999px;
+	background: var(--color-surface);
+	padding: 0.5rem 0.9rem;
+	color: var(--color-primary-dark);
+	font: inherit;
+	font-size: 0.875rem;
+	font-weight: 800;
+	cursor: pointer;
+}
+
+.filter-chips button[aria-pressed="true"] {
+	border-width: 2px;
+	background: var(--color-primary);
+	color: #ffffff;
+}
+
+.filter-chips button[aria-pressed="true"]::before {
+	content: "✓ ";
+}
+
+.attraction-filter__summary {
+	display: flex;
+	justify-content: space-between;
+	gap: 1rem;
+	align-items: center;
+	margin-top: 1.25rem;
+}
+
+.attraction-filter__summary p {
+	margin: 0;
+	font-weight: 800;
+}
+
+.filter-results {
+	display: grid;
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+	gap: 1rem;
+	margin-top: 1.5rem;
+}
+
+.filter-result {
+	min-width: 0;
+	border: 1px solid var(--color-border);
+	border-radius: var(--radius-medium);
+	background: var(--color-surface);
+	padding: 1.25rem;
+	box-shadow: var(--shadow-card);
+}
+
+.filter-result h3 {
+	margin: 0 0 0.5rem;
+	line-height: 1.3;
+}
+
+.filter-result__meta {
+	color: var(--color-primary-dark);
+	font-size: 0.8125rem;
+	font-weight: 900;
+}
+
+.filter-empty {
+	margin-top: 1.5rem;
+	border: 2px dashed var(--color-accent);
+	border-radius: var(--radius-medium);
+	background: #fff0f7;
+	padding: 2rem;
+	text-align: center;
+}
+
+@media (max-width: 48rem) {
+	.carousel__slide,
+	.ui-demo-notes,
+	.filter-results {
+		grid-template-columns: 1fr;
+	}
+
+	.carousel__visual {
+		min-height: 12rem;
+	}
+
+	.attraction-filter__summary {
+		align-items: flex-start;
+		flex-direction: column;
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.carousel__slide {
+		transition: none;
 	}
 }
