@@ -709,20 +709,10 @@ document.addEventListener('DOMContentLoaded', () => {
 	const createPawCursor = () => {
 		const cursor = document.createElement('span');
 		const icon = document.createElement('span');
-		const pad = document.createElement('span');
 
 		cursor.className = 'custom-paw-cursor is-hidden';
 		cursor.setAttribute('aria-hidden', 'true');
 		icon.className = 'custom-paw-cursor__icon';
-		pad.className = 'custom-paw-cursor__pad';
-		icon.append(pad);
-
-		for (let index = 0; index < 4; index += 1) {
-			const toe = document.createElement('span');
-			toe.className = 'custom-paw-cursor__toe';
-			icon.append(toe);
-		}
-
 		cursor.append(icon);
 		document.body.append(cursor);
 		return cursor;
