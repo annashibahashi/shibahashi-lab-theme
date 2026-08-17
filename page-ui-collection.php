@@ -13,7 +13,7 @@
 		</header>
 
 		<nav class="ui-demo-index" aria-label="UIデモのページ内目次">
-			<h2 class="ui-demo-index__title">11種類のUIデモ</h2>
+			<h2 class="ui-demo-index__title">12種類のUIデモ</h2>
 			<ol class="ui-demo-index__list">
 				<li><a href="#card-layout">カードレイアウト</a></li>
 				<li><a href="#flip-card">フリップカード</a></li>
@@ -21,10 +21,11 @@
 				<li><a href="#accordion">アコーディオン</a></li>
 				<li><a href="#modal">モーダル</a></li>
 				<li><a href="#cta-microinteraction">CTAマイクロインタラクション</a></li>
-				<li><a href="#custom-paw-cursor">肉球デザインカーソル</a></li>
+				<li><a href="#custom-candy-cursor">キャンディデザインカーソル</a></li>
 				<li><a href="#carousel">スライダー／カルーセル</a></li>
 				<li><a href="#attraction-filter">検索・フィルター</a></li>
 				<li><a href="#before-after">ビフォー・アフター比較</a></li>
+				<li><a href="#filter-simulator">フィルターシミュレーター</a></li>
 				<li><a href="#choice-diagnosis">選択式診断</a></li>
 			</ol>
 		</nav>
@@ -174,24 +175,24 @@
 			</div>
 		</section>
 
-		<section id="custom-paw-cursor" class="ui-demo" aria-labelledby="custom-paw-cursor-title">
+		<section id="custom-candy-cursor" class="ui-demo" aria-labelledby="custom-candy-cursor-title">
 			<header class="ui-demo__header">
-				<p class="section-label">PAW CURSOR</p>
-				<h2 id="custom-paw-cursor-title">肉球デザインカーソル</h2>
-				<p>動物の肉球をモチーフにしたカーソルと、移動に合わせて現れる小さな光によって、サイトを探索する楽しさと世界観を補強するマイクロインタラクションです。</p>
+				<p class="section-label">CANDY CURSOR</p>
+				<h2 id="custom-candy-cursor-title">キャンディデザインカーソル</h2>
+				<p>ペロペロキャンディをモチーフにしたカーソルと、移動に合わせて現れる小さな光によって、サイトを探索する楽しさと世界観を補強するマイクロインタラクションです。</p>
 			</header>
-			<div class="custom-paw-cursor-demo">
-				<p class="custom-paw-cursor-demo__message">このエリア内でマウスを動かし、リンクやボタンに重ねたりクリックしたりして、肉球カーソルの変化を確認してみてください。</p>
-				<div class="custom-paw-cursor-demo__actions">
+			<div class="custom-candy-cursor-demo">
+				<p class="custom-candy-cursor-demo__message">このエリア内でマウスを動かし、リンクやボタンに重ねたりクリックしたりして、キャンディカーソルの変化を確認してみてください。</p>
+				<div class="custom-candy-cursor-demo__actions">
 					<a class="text-link" href="#cta-microinteraction">CTAデモを見る</a>
 					<button class="button-link" type="button" data-modal-open="light-arrow-dialog">詳細モーダルを開く</button>
 				</div>
-				<p class="custom-paw-cursor-demo__note">この演出は、マウスなどの細かいポインター操作に対応した環境で確認できます。</p>
+				<p class="custom-candy-cursor-demo__note">この演出は、マウスなどの細かいポインター操作に対応した環境で確認できます。</p>
 			</div>
 			<div class="ui-demo-notes">
-				<section><h3>どんな見せ方？</h3><p>通常の矢印カーソルを肉球モチーフのデザインへ置き換え、移動時には小さな光を短く残します。</p><p>リンクやボタンへ重ねたとき、クリックしたときにも肉球の見た目を変化させ、操作に対する反応を返します。</p></section>
-				<section><h3>向いている用途</h3><ul><li>テーマパーク型サイト</li><li>エンターテインメントサイト</li><li>キャンペーンサイト</li><li>キャラクターや動物を扱うコンテンツ</li><li>ゲーム性や探索感のあるサイト</li><li>独自の世界観を体験させたいブランドサイト</li></ul></section>
-				<section><h3>期待できること</h3><p>全ページを通して共通の案内役を持たせることで、サイトを移動する行為そのものを体験の一部にできます。</p><p>肉球と光の反応によって、ユーザーがサイトの世界へ参加している感覚や、触ってみたくなる気持ちを補助します。</p></section>
+				<section><h3>どんな見せ方？</h3><p>通常の矢印カーソルをキャンディモチーフのデザインへ置き換え、移動時には小さな光を短く残します。</p><p>リンクやボタンへ重ねたとき、クリックしたときにもキャンディの大きさや傾きを変化させ、操作に対する反応を返します。</p></section>
+				<section><h3>向いている用途</h3><ul><li>テーマパーク型サイト</li><li>エンターテインメントサイト</li><li>キャンペーンサイト</li><li>お菓子や食品を扱うコンテンツ</li><li>キャラクター性のあるコンテンツ</li><li>ゲーム性や探索感のあるサイト</li><li>独自の世界観を体験させたいブランドサイト</li></ul></section>
+				<section><h3>期待できること</h3><p>全ページを通して共通の案内役を持たせることで、サイトを移動する行為そのものを体験の一部にできます。</p><p>キャンディと光の反応によって、ユーザーがサイトの世界へ参加している感覚や、触ってみたくなる気持ちを補助します。</p></section>
 				<section><h3>設計のポイント</h3><p>独自カーソルは常に視界へ入るため、デザイン性だけでなく、クリック位置の分かりやすさが重要です。</p><p>入力、テキスト選択、ドラッグなどの操作では標準カーソルへ戻し、演出より操作性を優先します。</p><p>タッチ端末ではカーソルが存在しないため、画面幅ではなくポインターの種類によって有効化を判断します。</p></section>
 				<section><h3>関連する表現</h3><ul><li>カスタムカーソル</li><li>カーソルエフェクト</li><li>マイクロインタラクション</li><li>操作フィードバック</li><li>モーションデザイン</li><li>世界観演出</li></ul></section>
 			</div>
@@ -311,6 +312,62 @@
 				<section><h3>期待できること</h3><p>説明文だけでは伝わりにくい変化を、ユーザー自身の操作によって直感的に理解してもらえます。</p></section>
 				<section><h3>設計のポイント</h3><p>見た目の変化だけでなく、何がどのように改善されたのかをラベルや補足文でも伝えることが重要です。</p><p>比較する2つの素材は、同じサイズ・同じ構図・同じ位置関係で用意すると違いを理解しやすくなります。</p></section>
 				<section><h3>関連する表現</h3><ul><li>スライダー／カルーセル</li><li>画像ギャラリー</li><li>ケーススタディ</li><li>リニューアル実績</li></ul></section>
+			</div>
+		</section>
+
+		<section id="filter-simulator" class="ui-demo" aria-labelledby="filter-simulator-title">
+			<header class="ui-demo__header">
+				<p class="section-label">FILTER SIMULATOR</p>
+				<h2 id="filter-simulator-title">フィルターシミュレーター</h2>
+				<p>複数の条件を組み合わせながら、表示結果の変化をその場で試せるUIです。</p>
+			</header>
+			<form class="filter-simulator" data-filter-simulator>
+				<div class="filter-simulator__controls">
+					<h3>おすすめエリアの条件</h3>
+					<fieldset class="filter-simulator__field">
+						<legend>体験のタイプ</legend>
+						<label for="simulator-experience">興味のある体験を選ぶ</label>
+						<select id="simulator-experience" name="experience" data-simulator-experience>
+							<option value="learn" selected>じっくり学びたい</option>
+							<option value="visual">直感的に楽しみたい</option>
+							<option value="story">物語を体験したい</option>
+						</select>
+					</fieldset>
+					<fieldset class="filter-simulator__field">
+						<legend>にぎやかさ</legend>
+						<label for="simulator-liveliness">希望するにぎやかさ</label>
+						<input id="simulator-liveliness" name="liveliness" type="range" min="1" max="3" value="2" step="1" aria-describedby="simulator-liveliness-value" aria-valuenow="2" aria-valuetext="ほどよくにぎやか" data-simulator-liveliness>
+						<p id="simulator-liveliness-value" class="filter-simulator__range-value" data-simulator-liveliness-value>2：ほどよくにぎやか</p>
+					</fieldset>
+					<fieldset class="filter-simulator__field">
+						<legend>滞在時間</legend>
+						<div class="filter-simulator__radios">
+							<label><input type="radio" name="stay" value="short" checked data-simulator-stay>短時間</label>
+							<label><input type="radio" name="stay" value="long" data-simulator-stay>ゆっくり</label>
+						</div>
+					</fieldset>
+					<button class="filter-simulator__reset" type="reset">条件をリセット</button>
+				</div>
+				<section class="filter-simulator__result" aria-live="polite" aria-atomic="true" data-simulator-result hidden>
+					<h3>あなたへのおすすめ</h3>
+					<p class="filter-simulator__area" data-simulator-area>UI COLLECTION</p>
+					<p data-simulator-description></p>
+					<p class="filter-simulator__guidance" data-simulator-guidance></p>
+					<div class="filter-simulator__summary">
+						<h4>選択中の条件</h4>
+						<p data-simulator-summary></p>
+					</div>
+					<a class="button-link filter-simulator__link" href="#card-layout" data-simulator-link>UI COLLECTIONへ移動する</a>
+					<p class="filter-simulator__pending" data-simulator-pending hidden>今後公開予定</p>
+				</section>
+				<noscript><p class="notice filter-simulator__noscript">このデモの結果表示にはJavaScriptを使用します。</p></noscript>
+			</form>
+			<div class="ui-demo-notes">
+				<section><h3>どんな見せ方？</h3><p>複数の条件を選んだり調整したりしながら、結果の変化をその場で確認できるUIです。</p></section>
+				<section><h3>向いている用途</h3><ul><li>商品検索</li><li>プラン選択</li><li>料金シミュレーション</li><li>診断コンテンツ</li><li>店舗や施設の絞り込み</li><li>条件に合うサービスの提案</li></ul></section>
+				<section><h3>期待できること</h3><p>選択条件と結果の関係をリアルタイムに見せることで、ユーザーが自分に合う選択肢を理解しやすくなります。</p></section>
+				<section><h3>設計のポイント</h3><p>条件を増やしすぎると操作負荷が高くなるため、意思決定に影響する条件へ絞ることが重要です。</p><p>結果だけでなく「なぜこの結果になったのか」が分かる説明を添えることで、納得感を高められます。</p></section>
+				<section><h3>関連する表現</h3><ul><li>検索・フィルター</li><li>診断コンテンツ</li><li>料金シミュレーター</li><li>レコメンドUI</li></ul></section>
 			</div>
 		</section>
 

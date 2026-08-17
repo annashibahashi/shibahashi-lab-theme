@@ -442,6 +442,111 @@ document.addEventListener('DOMContentLoaded', () => {
 		comparison.classList.add('is-enhanced');
 	};
 
+	const initFilterSimulator = (simulator) => {
+		const experienceSelect = simulator.querySelector('[data-simulator-experience]');
+		const livelinessRange = simulator.querySelector('[data-simulator-liveliness]');
+		const livelinessValue = simulator.querySelector('[data-simulator-liveliness-value]');
+		const stayOptions = Array.from(simulator.querySelectorAll('[data-simulator-stay]'));
+		const result = simulator.querySelector('[data-simulator-result]');
+		const resultArea = simulator.querySelector('[data-simulator-area]');
+		const resultDescription = simulator.querySelector('[data-simulator-description]');
+		const resultGuidance = simulator.querySelector('[data-simulator-guidance]');
+		const resultSummary = simulator.querySelector('[data-simulator-summary]');
+		const resultLink = simulator.querySelector('[data-simulator-link]');
+		const resultPending = simulator.querySelector('[data-simulator-pending]');
+
+		if (!experienceSelect || !livelinessRange || !livelinessValue || !stayOptions.length || !result || !resultArea || !resultDescription || !resultGuidance || !resultSummary || !resultLink || !resultPending) {
+			return;
+		}
+
+		const recommendations = {
+			ui: {
+				name: 'UI COLLECTION',
+				description: '基本UIを操作しながら、情報設計の仕組みを学べるエリアです。',
+				hasLink: true,
+			},
+			visual: {
+				name: 'VISUAL PLAYGROUND',
+				description: '色や形の変化に触れながら、直感的にWeb表現を楽しめるエリアです。',
+				hasLink: false,
+			},
+			idea: {
+				name: 'IDEA LAB',
+				description: 'アイデアを深めながら、表現の組み立て方をじっくり考えられるエリアです。',
+				hasLink: false,
+			},
+			story: {
+				name: 'STORY EXPERIENCE',
+				description: '物語の流れに沿って、場面の変化を体験できるエリアです。',
+				hasLink: false,
+			},
+		};
+
+		const livelinessOptions = {
+			1: {
+				label: '落ち着いている',
+				guidance: '自分のペースで、落ち着いて楽しめるルートがおすすめです。',
+			},
+			2: {
+				label: 'ほどよくにぎやか',
+				guidance: '見どころを巡りながら、ほどよく体験できるルートがおすすめです。',
+			},
+			3: {
+				label: 'とてもにぎやか',
+				guidance: '動きや変化をたっぷり楽しめる、にぎやかなルートがおすすめです。',
+			},
+		};
+
+		const getRecommendationKey = (experience, stay) => {
+			if (experience === 'visual') {
+				return 'visual';
+			}
+
+			if (experience === 'story') {
+				return 'story';
+			}
+
+			return stay === 'long' ? 'idea' : 'ui';
+		};
+
+		const updateResult = () => {
+			const selectedStay = stayOptions.find((option) => option.checked);
+			const selectedExperience = experienceSelect.selectedOptions[0];
+			const liveliness = livelinessOptions[livelinessRange.value];
+
+			if (!selectedStay || !selectedExperience || !liveliness) {
+				return;
+			}
+
+			const recommendation = recommendations[getRecommendationKey(experienceSelect.value, selectedStay.value)];
+			const stayLabel = selectedStay.closest('label')?.textContent.trim() || selectedStay.value;
+			const stayDescription = selectedStay.value === 'long'
+				? '時間をかけて、ゆっくり巡る選択に合っています。'
+				: '短時間で、ポイントを絞って巡る選択に合っています。';
+
+			livelinessValue.textContent = `${livelinessRange.value}：${liveliness.label}`;
+			livelinessRange.setAttribute('aria-valuenow', livelinessRange.value);
+			livelinessRange.setAttribute('aria-valuetext', liveliness.label);
+			resultArea.textContent = recommendation.name;
+			resultDescription.textContent = `${recommendation.description}${stayDescription}`;
+			resultGuidance.textContent = liveliness.guidance;
+			resultSummary.textContent = `${selectedExperience.textContent} ／ ${liveliness.label} ／ ${stayLabel}`;
+			resultLink.hidden = !recommendation.hasLink;
+			resultPending.hidden = recommendation.hasLink;
+			result.hidden = false;
+		};
+
+		experienceSelect.addEventListener('change', updateResult);
+		livelinessRange.addEventListener('input', updateResult);
+		stayOptions.forEach((option) => option.addEventListener('change', updateResult));
+		simulator.addEventListener('submit', (event) => event.preventDefault());
+		simulator.addEventListener('reset', () => {
+			window.requestAnimationFrame(updateResult);
+		});
+
+		updateResult();
+	};
+
 	const initChoiceDiagnosis = (diagnosis) => {
 		const questionGroups = Array.from(diagnosis.querySelectorAll('[data-diagnosis-question]'));
 		const resultContainer = diagnosis.querySelector('[data-diagnosis-result]');
@@ -678,6 +783,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	document.querySelectorAll('[data-carousel]').forEach(initCarousel);
 	document.querySelectorAll('[data-multi-tag-filter]').forEach(initMultiTagFilter);
 	document.querySelectorAll('[data-before-after]').forEach(initBeforeAfter);
+	document.querySelectorAll('[data-filter-simulator]').forEach(initFilterSimulator);
 	document.querySelectorAll('[data-choice-diagnosis]').forEach(initChoiceDiagnosis);
 });
 
@@ -690,7 +796,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	const maximumSparkles = 10;
 	const fallbackLifetime = 800;
 	let isEnabled = false;
-	let pawCursor = null;
+	let candyCursor = null;
 	let lastSparkleX = null;
 	let lastSparkleY = null;
 	let latestPoint = null;
@@ -706,13 +812,13 @@ document.addEventListener('DOMContentLoaded', () => {
 		activeSparkles.clear();
 	};
 
-	const createPawCursor = () => {
+	const createCandyCursor = () => {
 		const cursor = document.createElement('span');
 		const icon = document.createElement('span');
 
-		cursor.className = 'custom-paw-cursor is-hidden';
+		cursor.className = 'custom-candy-cursor is-hidden';
 		cursor.setAttribute('aria-hidden', 'true');
-		icon.className = 'custom-paw-cursor__icon';
+		icon.className = 'custom-candy-cursor__icon';
 		cursor.append(icon);
 		document.body.append(cursor);
 		return cursor;
@@ -724,10 +830,17 @@ document.addEventListener('DOMContentLoaded', () => {
 		}
 
 		const sparkle = document.createElement('span');
-		sparkle.className = 'cursor-sparkle';
+		const distanceX = x - lastSparkleX;
+		const distanceY = y - lastSparkleY;
+		const distance = Math.hypot(distanceX, distanceY);
+		const trailOffset = 12;
+		const sparkleX = distance > 0 ? x - (distanceX / distance) * trailOffset : x;
+		const sparkleY = distance > 0 ? y - (distanceY / distance) * trailOffset : y;
+
+		sparkle.className = 'candy-cursor-spark';
 		sparkle.setAttribute('aria-hidden', 'true');
-		sparkle.style.left = `${x + 8}px`;
-		sparkle.style.top = `${y + 12}px`;
+		sparkle.style.left = `${sparkleX}px`;
+		sparkle.style.top = `${sparkleY}px`;
 		activeSparkles.add(sparkle);
 		document.body.append(sparkle);
 
@@ -744,28 +857,32 @@ document.addEventListener('DOMContentLoaded', () => {
 	const renderLatestPoint = () => {
 		animationFrameId = null;
 
-		if (!latestPoint || !pawCursor) {
+		if (!latestPoint || !candyCursor) {
 			return;
 		}
 
 		const point = latestPoint;
 		const isSuspended = root.classList.contains('is-custom-cursor-suspended');
 		latestPoint = null;
-		pawCursor.style.setProperty('--paw-cursor-x', `${point.x}px`);
-		pawCursor.style.setProperty('--paw-cursor-y', `${point.y}px`);
-		pawCursor.classList.toggle('is-hovering-interactive', point.isInteractive);
-		pawCursor.classList.toggle('is-hidden', point.isDisabled || isSuspended);
-		root.classList.add('has-custom-paw-cursor');
+		candyCursor.style.setProperty('--candy-cursor-x', `${point.x}px`);
+		candyCursor.style.setProperty('--candy-cursor-y', `${point.y}px`);
+		candyCursor.classList.toggle('is-hovering-interactive', point.isInteractive);
+		candyCursor.classList.toggle('is-hidden', point.isDisabled || isSuspended);
+		root.classList.add('has-custom-candy-cursor');
 
 		if (point.isDisabled || isSuspended || point.buttons !== 0) {
 			return;
 		}
 
-		if (lastSparkleX !== null && lastSparkleY !== null) {
-			const distance = Math.hypot(point.x - lastSparkleX, point.y - lastSparkleY);
-			if (distance < minimumDistance) {
-				return;
-			}
+		if (lastSparkleX === null || lastSparkleY === null) {
+			lastSparkleX = point.x;
+			lastSparkleY = point.y;
+			return;
+		}
+
+		const distance = Math.hypot(point.x - lastSparkleX, point.y - lastSparkleY);
+		if (distance < minimumDistance) {
+			return;
 		}
 
 		createSparkle(point);
@@ -810,46 +927,46 @@ document.addEventListener('DOMContentLoaded', () => {
 	};
 
 	const handlePointerDown = (event) => {
-		if (!isEnabled || event.pointerType !== 'mouse' || !pawCursor) {
+		if (!isEnabled || event.pointerType !== 'mouse' || !candyCursor) {
 			return;
 		}
 
-		if (isDisabledTarget(event.target) || !isInteractiveTarget(event.target)) {
+		if (isDisabledTarget(event.target)) {
 			root.classList.add('is-custom-cursor-suspended');
-			pawCursor.classList.add('is-hidden');
+			candyCursor.classList.add('is-hidden');
 			removeAllSparkles();
 			return;
 		}
 
-		pawCursor.classList.add('is-pointer-down');
+		candyCursor.classList.add('is-pointer-down');
 	};
 
 	const restorePointerState = (event) => {
 		root.classList.remove('is-custom-cursor-suspended');
-		pawCursor?.classList.remove('is-pointer-down');
+		candyCursor?.classList.remove('is-pointer-down');
 
-		if (event?.pointerType === 'mouse' && pawCursor) {
+		if (event?.pointerType === 'mouse' && candyCursor) {
 			const isDisabled = isDisabledTarget(event.target);
-			pawCursor.classList.toggle('is-hidden', isDisabled);
-			pawCursor.classList.toggle('is-hovering-interactive', !isDisabled && isInteractiveTarget(event.target));
+			candyCursor.classList.toggle('is-hidden', isDisabled);
+			candyCursor.classList.toggle('is-hovering-interactive', !isDisabled && isInteractiveTarget(event.target));
 		}
 	};
 
-	const hidePawCursor = () => {
-		root.classList.remove('has-custom-paw-cursor', 'is-custom-cursor-suspended');
-		pawCursor?.classList.add('is-hidden');
-		pawCursor?.classList.remove('is-pointer-down');
+	const hideCandyCursor = () => {
+		root.classList.remove('has-custom-candy-cursor', 'is-custom-cursor-suspended');
+		candyCursor?.classList.add('is-hidden');
+		candyCursor?.classList.remove('is-pointer-down');
 	};
 
 	const handlePointerOut = (event) => {
 		if (!event.relatedTarget) {
-			hidePawCursor();
+			hideCandyCursor();
 		}
 	};
 
 	const handleVisibilityChange = () => {
 		if (document.hidden) {
-			hidePawCursor();
+			hideCandyCursor();
 		}
 	};
 
@@ -860,7 +977,7 @@ document.addEventListener('DOMContentLoaded', () => {
 		document.addEventListener('pointercancel', restorePointerState, { passive: true });
 		document.addEventListener('pointerout', handlePointerOut, { passive: true });
 		document.addEventListener('visibilitychange', handleVisibilityChange);
-		window.addEventListener('blur', hidePawCursor);
+		window.addEventListener('blur', hideCandyCursor);
 	};
 
 	const removeCursorListeners = () => {
@@ -870,10 +987,10 @@ document.addEventListener('DOMContentLoaded', () => {
 		document.removeEventListener('pointercancel', restorePointerState);
 		document.removeEventListener('pointerout', handlePointerOut);
 		document.removeEventListener('visibilitychange', handleVisibilityChange);
-		window.removeEventListener('blur', hidePawCursor);
+		window.removeEventListener('blur', hideCandyCursor);
 	};
 
-	const updateCustomPawCursor = () => {
+	const updateCustomCandyCursor = () => {
 		const shouldEnable = hoverPointerMedia.matches && !reducedMotionMedia.matches;
 
 		if (shouldEnable === isEnabled) {
@@ -891,26 +1008,26 @@ document.addEventListener('DOMContentLoaded', () => {
 		}
 
 		if (isEnabled) {
-			pawCursor = createPawCursor();
+			candyCursor = createCandyCursor();
 			addCursorListeners();
 		} else {
 			removeCursorListeners();
-			root.classList.remove('has-custom-paw-cursor', 'is-custom-cursor-suspended');
-			pawCursor?.remove();
-			pawCursor = null;
+			root.classList.remove('has-custom-candy-cursor', 'is-custom-cursor-suspended');
+			candyCursor?.remove();
+			candyCursor = null;
 			removeAllSparkles();
 		}
 	};
 
 	const watchMediaChange = (mediaQuery) => {
 		if (typeof mediaQuery.addEventListener === 'function') {
-			mediaQuery.addEventListener('change', updateCustomPawCursor);
+			mediaQuery.addEventListener('change', updateCustomCandyCursor);
 		} else {
-			mediaQuery.addListener(updateCustomPawCursor);
+			mediaQuery.addListener(updateCustomCandyCursor);
 		}
 	};
 
 	watchMediaChange(hoverPointerMedia);
 	watchMediaChange(reducedMotionMedia);
-	updateCustomPawCursor();
+	updateCustomCandyCursor();
 });

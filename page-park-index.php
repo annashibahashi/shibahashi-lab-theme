@@ -16,13 +16,14 @@
 			<ul class="index-preview__list">
 				<li class="index-preview__item" data-index-name="カード" data-index-purpose="情報整理"><a href="<?php echo esc_url(home_url('/ui-collection/#card-layout')); ?>">カード</a><span>UI COLLECTION</span></li>
 				<li class="index-preview__item" data-index-name="CTA マイクロインタラクション" data-index-purpose="視線誘導 アフォーダンス"><a href="<?php echo esc_url(home_url('/ui-collection/#cta-microinteraction')); ?>">CTAマイクロインタラクション</a><span>UI COLLECTION</span></li>
-				<li class="index-preview__item" data-index-name="肉球 デザイン カーソル" data-index-purpose="操作反応 世界観演出"><a href="<?php echo esc_url(home_url('/ui-collection/#custom-paw-cursor')); ?>">肉球デザインカーソル</a><span>UI COLLECTION</span></li>
+				<li class="index-preview__item" data-index-name="キャンディ デザイン カーソル" data-index-purpose="操作反応 世界観演出"><a href="<?php echo esc_url(home_url('/ui-collection/#custom-candy-cursor')); ?>">キャンディデザインカーソル</a><span>UI COLLECTION</span></li>
 				<li class="index-preview__item" data-index-name="タイポグラフィー" data-index-purpose="印象づくり"><a href="<?php echo esc_url(home_url('/visual-playground/#typography')); ?>">タイポグラフィー</a><span>VISUAL PLAYGROUND</span></li>
 				<li class="index-preview__item" data-index-name="達成ゲージ" data-index-purpose="進捗表示"><a href="<?php echo esc_url(home_url('/data-motion/#progress-meter')); ?>">達成ゲージ</a><span>DATA MOTION</span></li>
 				<li class="index-preview__item" data-index-name="スクロール連動" data-index-purpose="物語表現"><a href="<?php echo esc_url(home_url('/story-experience/#scroll-animation')); ?>">スクロール連動</a><span>STORY EXPERIENCE</span></li>
 				<li class="index-preview__item" data-index-name="スライダー カルーセル" data-index-purpose="情報切り替え"><a href="<?php echo esc_url(home_url('/ui-collection/#carousel')); ?>">スライダー／カルーセル</a><span>UI COLLECTION</span></li>
 				<li class="index-preview__item" data-index-name="検索 フィルター" data-index-purpose="情報絞り込み"><a href="<?php echo esc_url(home_url('/ui-collection/#attraction-filter')); ?>">検索・フィルター</a><span>UI COLLECTION</span></li>
 				<li class="index-preview__item" data-index-name="ビフォー アフター 比較" data-index-purpose="改善比較"><a href="<?php echo esc_url(home_url('/ui-collection/#before-after')); ?>">ビフォー・アフター比較</a><span>UI COLLECTION</span></li>
+				<li class="index-preview__item" data-index-name="フィルター シミュレーター" data-index-purpose="条件診断"><a href="<?php echo esc_url(home_url('/ui-collection/#filter-simulator')); ?>">フィルターシミュレーター</a><span>UI COLLECTION</span></li>
 				<li class="index-preview__item" data-index-name="選択式 診断" data-index-purpose="施策提案"><a href="<?php echo esc_url(home_url('/ui-collection/#choice-diagnosis')); ?>">選択式診断</a><span>UI COLLECTION</span></li>
 			</ul>
 		</section>
