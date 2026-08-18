@@ -12,7 +12,8 @@
 	<div class="site-header__inner">
 		<p class="site-title">
 			<a href="<?php echo esc_url(home_url('/')); ?>">
-				<?php echo esc_html(get_bloginfo('name')); ?>
+				<span class="site-title__main">SINQ WEB PARK</span>
+				<span class="site-title__sub">SHIBAHASHI LAB</span>
 			</a>
 		</p>
 
